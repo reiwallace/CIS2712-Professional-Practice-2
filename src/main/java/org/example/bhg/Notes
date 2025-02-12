@@ -1,0 +1,11 @@
+Check collision
+A fire-delay (or shooting cooldown) - DONE
+implementing a pause menu when ESCAPE is pressed?
+For Enemy Shooting (Every 2 Seconds) - DONE
+Have different weapons
+Add explosion effects when bullets hit?
+Display health bars for enemies and the player?
+Add power-ups that heal the player?
+Make enemies move in patterns (zig-zag, spirals)?
+Make movement smoother with setOnKeyReleased()?
+Prevent the player from going off-screen?
