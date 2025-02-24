@@ -16,6 +16,9 @@ public class MainWindow {
     private int columns = 40; // Number of columns in the grid pane
 
     public MainWindow() {
+        // Define height to calculate title bar height later
+        stage.setMaxHeight(100);
+        stage.setMaxWidth(100);
         // Create grid rows for pane
         for(int i = 0; i < rows; i++) {
             RowConstraints row = new RowConstraints();
@@ -32,7 +35,6 @@ public class MainWindow {
         stage.setResizable(false);
         stage.setTitle(title);
         stage.setScene(scene);
-        windowedMode();
     }
 
     // Set stage to windowed mode.
@@ -52,6 +54,7 @@ public class MainWindow {
 
     // Change stage size with an aspect ratio of 4:3 from the width.
     private void setSize(double width) {
+        double titleBarHeight = stage.getHeight() - scene.getHeight();
         stage.setMaxWidth(width);
         stage.setMaxHeight(width * 0.75);
     }

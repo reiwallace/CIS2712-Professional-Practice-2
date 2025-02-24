@@ -16,9 +16,9 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         MainWindow gameWindow = new MainWindow();
         gameWindow.getStage().show();
+        gameWindow.windowedMode();
         GameFrame gameFrame = new GameFrame(gameWindow.getScene().getHeight(), gameWindow.getScene().getWidth());
-        gameWindow.getGrid().add(gameFrame.getGameFrame(), 0, 0);
-
+        gameWindow.getGrid().add(gameFrame.getGameFrame(), 0, 0, 20, 30);
 
         /* Uses rectangles to show game area
         for(int y = 1; y < 29; y++) {

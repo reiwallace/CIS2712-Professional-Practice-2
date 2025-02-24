@@ -11,8 +11,8 @@ public class GameFrame {
     private int[] gameFrameSize = {24, 28}; // Size of gameFrame in tiles
 
     public GameFrame(double sceneHeight, double sceneWidth) {
-        gameFrame.setWidth((sceneWidth/40)*gameFrameSize[0]);
-        gameFrame.setHeight((sceneHeight/30)*gameFrameSize[1]);
+        gameFrame.setWidth((sceneWidth/40)*24);
+        gameFrame.setHeight((sceneHeight/30)*28);
         gameFrame.setFill(Color.BLACK);
     }
 
