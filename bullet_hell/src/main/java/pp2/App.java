@@ -23,8 +23,6 @@ public class App extends Application {
                 gameWindow.getGrid().add(rectangle, x, y);
             }
         }*/
-        Button b = new Button("1");
-        gameWindow.getGrid().add(b, 0, 0);
     }
 
 
