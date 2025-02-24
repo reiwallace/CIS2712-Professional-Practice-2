@@ -1,4 +1,4 @@
-package pp2;
+package pp2.GUI;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
@@ -29,7 +29,6 @@ public class MainWindow {
             pane.getColumnConstraints().add(column);
         }
 
-        scene.getStylesheets().add(getClass().getResource("BulletHell.css").toExternalForm());
         stage.setResizable(false);
         stage.setTitle(title);
         stage.setScene(scene);

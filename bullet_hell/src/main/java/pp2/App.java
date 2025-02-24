@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import pp2.GUI.GameFrame;
+import pp2.GUI.MainWindow;
 
 public class App extends Application {
 
@@ -14,6 +16,10 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         MainWindow gameWindow = new MainWindow();
         gameWindow.getStage().show();
+        GameFrame gameFrame = new GameFrame(gameWindow.getScene().getHeight(), gameWindow.getScene().getWidth());
+        gameWindow.getGrid().add(gameFrame.getGameFrame(), 0, 0);
+
+
         /* Uses rectangles to show game area
         for(int y = 1; y < 29; y++) {
             for(int x = 2; x < 26; x++) {
