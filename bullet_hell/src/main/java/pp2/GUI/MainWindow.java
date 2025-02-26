@@ -26,7 +26,7 @@ public class MainWindow {
             pane.getRowConstraints().add(row);
         }
         // Create grid columns for pane
-        for(int i = 0; i < rows; i++) {
+        for(int i = 0; i < columns; i++) {
             ColumnConstraints column = new ColumnConstraints();
             column.setPercentWidth(100.0 / columns);
             pane.getColumnConstraints().add(column);

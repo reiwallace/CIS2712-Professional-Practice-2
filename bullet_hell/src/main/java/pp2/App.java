@@ -3,10 +3,8 @@ package pp2;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
 import pp2.GUI.GameFrame;
 import pp2.GUI.MainWindow;
 
@@ -17,15 +15,15 @@ public class App extends Application {
         MainWindow gameWindow = new MainWindow();
         gameWindow.getStage().show();
         gameWindow.windowedMode();
-        GameFrame gameFrame = new GameFrame(gameWindow.getScene().getHeight(), gameWindow.getScene().getWidth());
-        gameWindow.getGrid().add(gameFrame.getGameFrame(), 0, 0, 20, 30);
+        GameFrame gameFrame = new GameFrame(gameWindow.getScene().getHeight(), gameWindow.getStage().getWidth());
+        gameWindow.getGrid().add(gameFrame.getGameFrame(), 2, 1, 24, 28);
 
-        /* Uses rectangles to show game area
-        for(int y = 1; y < 29; y++) {
-            for(int x = 2; x < 26; x++) {
+        // Uses rectangles to show game area
+        /*for(int y = 0; y < 30; y++) {
+            for(int x = 0; x < 40; x++) {
                 Rectangle rectangle = new Rectangle();
-                rectangle.setHeight(gameWindow.getScene().getHeight()/30);
-                rectangle.setWidth(gameWindow.getScene().getWidth()/40);
+                rectangle.setHeight(10);
+                rectangle.setWidth(10);
                 gameWindow.getGrid().add(rectangle, x, y);
             }
         }*/
