@@ -1,8 +1,8 @@
 package pp2;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
+
+import javafx.scene.image.Image;
 
 public class ImageHandler {
 
