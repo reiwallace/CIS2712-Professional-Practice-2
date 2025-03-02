@@ -11,8 +11,8 @@ public class Bullet {
 
     private final double speed; // Speed of the bullet
     private ImageView imageView;
-    private Rectangle gameFrame; // The Main Game pane
-    private GridPane gamePane;
+    private Rectangle gameFrame; // The Main Game play area
+    private GridPane gamePane; // The game pane to add items to
     private boolean isActive = true;
     private double x_pos; // Horizontal position
     private double y_pos; // Vertical position

@@ -10,11 +10,13 @@ public class GameFrame {
     private final int[] gameFrameSize = {24, 28}; // Size of gameFrame in tiles
     private final ImageHandler backgroundImage = new ImageHandler(); // Background image
 
+    // Set up default game frame with its size
     public GameFrame(double sceneHeight, double stageWidth) {
         gameFrame.setWidth((stageWidth/40)*gameFrameSize[0]);
         gameFrame.setHeight((sceneHeight/30)*gameFrameSize[1]);
         gameFrame.setFill(Color.BLACK);
     }
 
+    // Setters and getters
     public Rectangle getGameFrame() { return gameFrame; }
 }
