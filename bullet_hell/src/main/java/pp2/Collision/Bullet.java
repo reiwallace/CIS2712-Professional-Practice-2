@@ -2,6 +2,7 @@ package pp2.Collision;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import pp2.ImageHandler;
@@ -10,7 +11,8 @@ public class Bullet {
 
     private final double speed; // Speed of the bullet
     private ImageView imageView;
-    private Pane gamePane; // The Main Game pane
+    private Rectangle gameFrame; // The Main Game pane
+    private GridPane gamePane;
     private boolean isActive = true;
     private double x_pos; // Horizontal position
     private double y_pos; // Vertical position
@@ -18,9 +20,10 @@ public class Bullet {
     private boolean isEnemyBullet; // To identify the enemy or player bullet
     private int damage; // Depend on either enemy or player bullets, the damage is different.
 
-    public Bullet(Pane gamePane, double x_pos, double y_pos, boolean isEnemyBullet, int damage, String bulletPath) {
+    public Bullet(Rectangle gameFrame, GridPane gamePane, double x_pos, double y_pos, boolean isEnemyBullet, int damage, String bulletPath) {
         this.x_pos = x_pos;
         this.y_pos = y_pos;
+        this.gameFrame = gameFrame;
         this.gamePane = gamePane;
         this.isEnemyBullet = isEnemyBullet;
         this.damage = damage;
@@ -36,7 +39,7 @@ public class Bullet {
         hitbox.setVisible(false); // Hide hitbox
 
 
-        // Add the bullet to the Main gamePane
+        // Add the bullet to the Main gameFrame
         this.gamePane.getChildren().addAll(imageView, hitbox);
 
 
@@ -45,7 +48,7 @@ public class Bullet {
     }
 
     // Moves the bullet upwards
-    private void moveBullet(Pane gamePane) {
+    private void moveBullet(Pane gameFrame) {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -54,7 +57,7 @@ public class Bullet {
 
                 // Remove bullet when off-screen
                 if (y_pos < -10) {
-                    gamePane.getChildren().remove(imageView);
+                    gameFrame.getChildren().remove(imageView);
                     stop();
                 }
             }
@@ -76,7 +79,7 @@ public class Bullet {
                 hitbox.setY(hitbox.getY() + speed);
 
                 // Remove bullet if off-screen
-                if (imageView.getY() < -10 || imageView.getY() > gamePane.getHeight()) {
+                if (imageView.getY() < -10 || imageView.getY() > gameFrame.getHeight()) {
                     removeBullet();
                     stop();
                 }
@@ -99,11 +102,19 @@ public class Bullet {
         this.imageView = imageView;
     }
 
-    public Pane getGamePane() {
+    public Rectangle getgameFrame() {
+        return gameFrame;
+    }
+
+    public void setGameFrame(Rectangle gameFrame) {
+        this.gameFrame = gameFrame;
+    }
+
+    public GridPane getgamePane() {
         return gamePane;
     }
 
-    public void setGamePane(Pane gamePane) {
+    public void setGamePane(GridPane gamePane) {
         this.gamePane = gamePane;
     }
 

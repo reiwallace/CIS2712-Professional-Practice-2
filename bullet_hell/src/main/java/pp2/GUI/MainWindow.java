@@ -45,7 +45,7 @@ public class MainWindow {
     }
 
     // Set stage to fullscreen mode.
-    public void fullScreeMode() {
+    public void fullScreenMode() {
         setSize(1404);
     }
 

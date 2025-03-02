@@ -15,7 +15,7 @@ public class App extends Application {
         MainWindow gameWindow = new MainWindow();
         Stage gameStage = gameWindow.getStage();
         gameStage.show();
-        gameWindow.windowedMode();
+        gameWindow.fullScreenMode();
         GameFrame gameFrame = new GameFrame(gameStage.getHeight() - gameWindow.titleBarHeight, gameStage.getWidth());
         gameWindow.getGrid().add(gameFrame.getGameFrame(), 2, 1, 24, 28);
 
