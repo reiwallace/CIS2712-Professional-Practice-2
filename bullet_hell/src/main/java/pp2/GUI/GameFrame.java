@@ -1,5 +1,6 @@
 package pp2.GUI;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,7 +11,8 @@ public class GameFrame {
     private final int[] gameFrameSize = {24, 28}; // Size of gameFrame in tiles
     private final String bgPath = "images/gameBGTEST.jpg";
 
-    private ImageView backgroundImage; // Background image
+    private Image imagePath = new Image("");
+    private ImageView backgroundImage  = new ImageView(imagePath); // Background image
 
     // Set up default game frame with its size
     public GameFrame(double sceneHeight, double stageWidth) {
@@ -18,7 +20,6 @@ public class GameFrame {
         gameFrame.setHeight((sceneHeight/30)*gameFrameSize[1]);
         gameFrame.setFill(Color.BLACK);
         // Set up background image
-        backgroundImage.setImage(new Image(""));
     }
 
     // Setters and getters
