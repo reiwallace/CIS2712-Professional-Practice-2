@@ -17,6 +17,7 @@ public class GameFrame {
         gameFrame.setWidth((stageWidth/40)*gameFrameSize[0]);
         gameFrame.setHeight((sceneHeight/30)*gameFrameSize[1]);
         gameFrame.setFill(Color.BLACK);
+        // Set up background image
         backgroundImage.setImage(ImageHandler.loadImage("images/enemy.png"));
     }
 
