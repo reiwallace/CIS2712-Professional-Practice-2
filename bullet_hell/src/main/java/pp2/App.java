@@ -19,7 +19,7 @@ public class App extends Application {
         gameWindow.getGrid().add(gameFrame.getBG(), 2, 1, 24, 28);
 
 
-        
+
         // Uses rectangles to show game area
         /*for(int y = 0; y < 30; y++) {
             for(int x = 0; x < 40; x++) {

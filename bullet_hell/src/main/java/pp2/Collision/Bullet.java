@@ -10,7 +10,7 @@ import pp2.ImageHandler;
 public class Bullet {
 
     private final double speed; // Speed of the bullet
-    private ImageView imageView;
+    private ImageView bulletView;
     private Rectangle gameFrame; // The Main Game play area
     private GridPane gamePane; // The game pane to add items to
     private boolean isActive = true;
@@ -30,17 +30,17 @@ public class Bullet {
         this.speed = isEnemyBullet ? 4.0 : -6.0; // Enemy bullets move down, player bullets move up
 
         // Set the bullet to an imageView
-        imageView = new ImageView(ImageHandler.loadImage(bulletPath));
-        imageView.setX(this.x_pos);
-        imageView.setY(this.y_pos);
+        bulletView = new ImageView(ImageHandler.loadImage(bulletPath));
+        bulletView.setX(this.x_pos);
+        bulletView.setY(this.y_pos);
 
         // Create hitbox the same size as bullet
-        hitbox = new Rectangle(this.x_pos, this.y_pos, imageView.getFitWidth(), imageView.getFitHeight());
+        hitbox = new Rectangle(this.x_pos, this.y_pos, bulletView.getFitWidth(), bulletView.getFitHeight());
         hitbox.setVisible(false); // Hide hitbox
 
 
         // Add the bullet to the Main gameFrame
-        this.gamePane.getChildren().addAll(imageView, hitbox);
+        this.gamePane.getChildren().addAll(bulletView, hitbox);
 
 
         // Move bullet
@@ -53,11 +53,11 @@ public class Bullet {
             @Override
             public void handle(long now) {
                 y_pos -= speed; // Move up
-                imageView.setY(y_pos);
+                bulletView.setY(y_pos);
 
                 // Remove bullet when off-screen
                 if (y_pos < -10) {
-                    gameFrame.getChildren().remove(imageView);
+                    gameFrame.getChildren().remove(bulletView);
                     stop();
                 }
             }
@@ -75,11 +75,11 @@ public class Bullet {
                 }
 
                 // Move bullet and hitbox
-                imageView.setY(imageView.getY() + speed);
+                bulletView.setY(bulletView.getY() + speed);
                 hitbox.setY(hitbox.getY() + speed);
 
                 // Remove bullet if off-screen
-                if (imageView.getY() < -10 || imageView.getY() > gameFrame.getHeight()) {
+                if (bulletView.getY() < -10 || bulletView.getY() > gameFrame.getHeight()) {
                     removeBullet();
                     stop();
                 }
@@ -90,16 +90,16 @@ public class Bullet {
 
     public void removeBullet() {
         isActive = false;
-        gamePane.getChildren().removeAll(imageView, hitbox);
+        gamePane.getChildren().removeAll(bulletView, hitbox);
     }
 
     // Getter/Setter methods
-    public ImageView getImageView() {
-        return imageView;
+    public ImageView getBulletView() {
+        return bulletView;
     }
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
+    public void setBulletView(ImageView bulletView) {
+        this.bulletView = bulletView;
     }
 
     public Rectangle getgameFrame() {

@@ -16,9 +16,6 @@ public abstract class Entity {
         setHitbox();
     }
 
-
-
-
     //Getters
     public int getHealth() { return health; }
     public Rectangle getHitbox() { return entityHitbox; }

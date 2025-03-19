@@ -1,7 +1,7 @@
 package pp2.GUI;
 
 import java.io.FileNotFoundException;
- 
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;

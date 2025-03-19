@@ -53,14 +53,14 @@ public class MainWindow {
     public Stage getStage() { return stage; }
     public Scene getScene() { return scene; }
     public GridPane getGrid() { return pane; }
-    public double getTitleBarHeight() { 
+    public double getTitleBarHeight() {
 
         return titleBarHeight; }
 
     // Change stage size with an aspect ratio of 4:3 from the width.
     private void setSize(double width) {
         stage.setMaxWidth(width);
-        stage.setMaxHeight(width * 0.75);       
+        stage.setMaxHeight(width * 0.75);
         stage.setMinWidth(width);
         stage.setMinHeight(width * 0.75);
 
