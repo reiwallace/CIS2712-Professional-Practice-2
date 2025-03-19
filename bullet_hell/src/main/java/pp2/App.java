@@ -16,7 +16,10 @@ public class App extends Application {
         gameWindow.windowedMode(); // Set default screen mode
         GameFrame gameFrame = new GameFrame(gameStage.getHeight() - gameWindow.titleBarHeight, gameStage.getWidth()); // Subtract title bar from height to get accurate size
         gameWindow.getGrid().add(gameFrame.getGameFrame(), 2, 1, 24, 28); // Add the game window to the game frame 2 columns in and 1 row down
+        gameWindow.getGrid().add(gameFrame.getBG(), 2, 1, 24, 28);
 
+
+        
         // Uses rectangles to show game area
         /*for(int y = 0; y < 30; y++) {
             for(int x = 0; x < 40; x++) {
