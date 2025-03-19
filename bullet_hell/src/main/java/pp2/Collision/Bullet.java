@@ -38,10 +38,8 @@ public class Bullet {
         hitbox = new Rectangle(this.x_pos, this.y_pos, bulletView.getFitWidth(), bulletView.getFitHeight());
         hitbox.setVisible(false); // Hide hitbox
 
-
         // Add the bullet to the Main gameFrame
         this.gamePane.getChildren().addAll(bulletView, hitbox);
-
 
         // Move bullet
         moveBullet();
