@@ -29,4 +29,5 @@ public class GameFrame {
     public Rectangle getGameFrame() { return gameFrame; }
     public ImageView getBG() { return backgroundImage; }
 
+    public void setBackgroundImage(Image image) { this.backgroundImage.setImage(image); }
 }
