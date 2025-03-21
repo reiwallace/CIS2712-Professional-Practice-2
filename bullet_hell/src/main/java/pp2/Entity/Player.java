@@ -3,22 +3,25 @@ package pp2.Entity;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.input.KeyCode;
 
-public class Player extends Entity{
-
+public class Player extends Entity {
     private int speed; // Player movement speed
     private int x_pos, y_pos; // Player position
 
-
-    // Player character constructor
+    /** Initialise player character
+     * @param imagePath - Image URL for player
+     * @param health - Health of the player
+     * @param speed - Speed player moves at
+     * @param gameGrid - Main window grid to attach player to
+     * @param gameFrame - Game area to restrict movement to
+     */
     public Player(String imagePath, int health, int speed, GridPane gameGrid, Rectangle gameFrame) {
         super(imagePath, health); // Call Entity constructor
         this.speed = speed;
-        this.gameGrid = gameGrid; // Assign game pane
-        this.gameFrame = gameFrame;
-        this.x_pos = (int) entityImage.getLayoutX();
-        this.y_pos = (int) entityImage.getLayoutY();
+        this.gameGrid = gameGrid; // Assign main window grid
+        this.gameFrame = gameFrame; // Assign game area
+        this.x_pos = (int) entityImage.getTranslateX();
+        this.y_pos = (int) entityImage.getTranslateY();
 
         // Set player characteristics
         entityImage.setId("player");
@@ -29,13 +32,17 @@ public class Player extends Entity{
         entityImage.setPreserveRatio(true);
         entityImage.setSmooth(true);
 
+        // Enable keypress detection
         gameGrid.setOnKeyPressed(event -> move(event.getCode()));
 
         // Add the player to the main pane
-        gameGrid.add(getImage(), 2, 1);
+        gameGrid.add(entityHitbox, 2, 1, 1, 3);
+        gameGrid.add(getImage(), 2, 1, 1, 3);
     }
 
-    // Moves the player based on input direction.
+    /** Moves the player based on input direction.
+     * @param key - Key press input
+     */
     @Override
     public void move(KeyCode key) {
         double newX = x_pos;
@@ -55,23 +62,21 @@ public class Player extends Entity{
                 break;
         }
 
-        //System.out.println(gameFrame.getLayoutX() + " " + gameFrame.getHeight() + " " + gameFrame.getLayoutY() + " " + gameFrame.getWidth());
-        System.out.println(entityImage.getTranslateX());
-        //System.out.println(entityImage.getFitWidth());
         // Ensure the player does not go out of bounds
-        if (newX >= 0 && newX <= gameFrame.getWidth()) {
+        if (newX >= 0 && newX <= gameFrame.getWidth() - entityImage.getFitWidth()) {
             x_pos = (int) newX;
         }
-        if (newY >= 0 && newY + entityImage.getFitHeight() <= gameFrame.getHeight()) {
+        if (newY >= 0 && newY <= gameFrame.getHeight() - entityImage.getFitHeight()) {
             y_pos = (int) newY;
         }
 
         // Update position
-
         setPosition(x_pos, y_pos);
     }
 
-    // Reduces the player's health when hit.
+    /** Reduces the player's health when hit.
+     * @param damage - Damage to reduce player's health by
+     */
     @Override
     public void takeDamage(int damage) {
         setHealth(getHealth() - damage);
@@ -82,33 +87,13 @@ public class Player extends Entity{
         }
     }
 
-    // Removes the player from the pan when health reaches 0.
-
+    /** Removes the player from the grid when health reaches 0.
+     */
     @Override
     public void destroy() {
         System.out.println("Player destroyed!");
         gameGrid.getChildren().removeAll(entityImage, getHitbox());
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public int getX_pos() {
-        return x_pos;
-    }
-
-    public void setX_pos(int x_pos) {
-        this.x_pos = x_pos;
-        entityImage.setLayoutX(x_pos);
-    }
-
-    public int getY_pos() {
-        return y_pos;
-    }
-
-    public void setY_pos(int y_pos) {
-        this.y_pos = y_pos;
-        entityImage.setX(y_pos);
-    }
+    public int getSpeed() { return speed; }
 }

@@ -1,6 +1,5 @@
 package pp2.GUI;
 
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -18,6 +17,9 @@ public class MainWindow {
 
     public double titleBarHeight = 37.5999755859375;
 
+    /** Initialises main game window
+     * @param debug - Whether to load debug menu or not
+     */
     public MainWindow(boolean debug) {
         // Define height to calculate title bar height later
         stage.setMaxHeight(100);
@@ -38,14 +40,18 @@ public class MainWindow {
         stage.setResizable(false);
         stage.setTitle(title);
         stage.setScene(scene);
+
+        if(debug) new DebugMenu(pane);
     }
 
-    // Set stage to windowed mode.
+    /** Set stage to windowed mode.
+     */
     public void windowedMode() {
         setSize(920);
     }
 
-    // Set stage to fullscreen mode.
+    /** Set stage to fullscreen mode.
+     */
     public void fullScreenMode() {
         setSize(1404);
     }
@@ -58,7 +64,9 @@ public class MainWindow {
 
         return titleBarHeight; }
 
-    // Change stage size with an aspect ratio of 4:3 from the width.
+    /** Change stage size with an aspect ratio of 4:3 from the width.
+     * @param width - Width to calculate size from
+     */
     private void setSize(double width) {
         stage.setMaxWidth(width);
         stage.setMaxHeight(width * 0.75);

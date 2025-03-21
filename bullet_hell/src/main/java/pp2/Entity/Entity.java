@@ -6,10 +6,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import pp2.ImageHandler;
 
 public abstract class Entity {
-
     protected ImageView entityImage; // Image to display on entity
     protected int health; // Starting health of entity
     protected Rectangle entityHitbox; // Hitbox of entity
@@ -19,7 +17,10 @@ public abstract class Entity {
 
     private final int[] hitboxScale = {1, 1};
 
-    //  Constructor for Entity.
+    /** Initialise an entity
+     * @param imagePath - Image URL to use for entity
+     * @param health - Health of entity
+     */
     public Entity(String imagePath, int health) {
         this.entityImage = new ImageView(new Image(imagePath));
         this.health = health;
@@ -27,24 +28,17 @@ public abstract class Entity {
         setHitbox(); // Initialize hitbox
     }
 
-    // Getters
-    public int getHealth() { return health; }
-    public Rectangle getHitbox() { return entityHitbox; }
-    public boolean isTargetable() { return isTargetable; }
-    public ImageView getImage() { return entityImage; }
-    public GridPane getgameGrid() { return gameGrid; }
-
-    // Setters
-    public void setHealth(int health) { this.health = health; }
-    public void setIsTargetable(boolean targetable) { this.isTargetable = targetable; }
-    public void setgameGrid(GridPane gameGrid) { this.gameGrid = gameGrid; }
-
-    // Loads an image for the entity.
+    /** Loads an image for the entity.
+     * @param imagePath - Image URL
+     */
     public void loadImage(String imagePath) {
-        this.entityImage.setImage(ImageHandler.loadImage(imagePath));
+        this.entityImage.setImage(new Image(imagePath));
         setHitbox(); // Update hitbox after changing image
     }
 
+    /** Toggles visability of hitbox
+     * @param toggle - Whether hitbox is displayed or not
+     */
     public void toggleHitboxVisability(boolean toggle) {
         if(toggle) {
             gameFrame.setFill(Color.BLACK);
@@ -53,7 +47,10 @@ public abstract class Entity {
         }
     }
 
-    // Sets the position of the entity and updates the hitbox.
+    /** Sets the position of the entity and updates the hitbox.
+     * @param x - X position to set entity to
+     * @param y - Y position to set entity to
+     */
     public void setPosition(int x, int y) {
         // Update character image position
         entityImage.setTranslateX(x);
@@ -63,7 +60,8 @@ public abstract class Entity {
         entityHitbox.setTranslateY(y);
     }
 
-    // Updates hitbox size based on the entity's image.
+    /** Updates hitbox size based on the entity's image.
+     */
     public void setHitbox() {
         if (entityImage != null) {
             entityHitbox = new Rectangle(
@@ -72,6 +70,19 @@ public abstract class Entity {
             );
         }
     }
+
+    // Getters
+    public int getHealth() { return health; }
+    public Rectangle getHitbox() { return entityHitbox; }
+    public boolean isTargetable() { return isTargetable; }
+    public ImageView getImage() { return entityImage; }
+    public GridPane getgameGrid() { return gameGrid; }
+    public double[] getPos() { return new double[] {entityImage.getLayoutX(), entityImage.getLayoutY()}; }
+
+    // Setters
+    public void setHealth(int health) { this.health = health; }
+    public void setIsTargetable(boolean targetable) { this.isTargetable = targetable; }
+    public void setgameGrid(GridPane gameGrid) { this.gameGrid = gameGrid; }
 
     // Abstract methods (must be implemented in subclasses)
     public abstract void move(KeyCode code);

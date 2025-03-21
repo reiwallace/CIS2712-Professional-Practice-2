@@ -12,9 +12,13 @@ public class GameFrame {
     private final int[] gameFrameSize = {24, 28}; // Size of gameFrame in tiles
 
     private Image imagePath = new Image("https://i.ibb.co/YBZzsddp/game-BGTEST.jpg");
-    public ImageView backgroundImage  = new ImageView(imagePath); // Background image
+    private ImageView backgroundImage  = new ImageView(imagePath); // Background image
 
-    // Set up default game frame with its size
+    /** Set up default game frame with its size
+     * @param sceneHeight - Height of scene to size area by
+     * @param stageWidth - Width of scene to size area by
+     * @throws FileNotFoundException - Yeets image errors
+     */
     public GameFrame(double sceneHeight, double stageWidth) throws FileNotFoundException{
         gameFrame.setWidth((stageWidth/40)*gameFrameSize[0]);
         gameFrame.setHeight((sceneHeight/30)*gameFrameSize[1]);
