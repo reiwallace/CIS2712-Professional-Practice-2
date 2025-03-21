@@ -1,8 +1,7 @@
-package pp2.Character;
+package pp2.Entity;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import pp2.Entity.Entity;
 
 public class Player extends Entity{
 
