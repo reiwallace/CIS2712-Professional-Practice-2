@@ -1,5 +1,6 @@
 package pp2.GUI;
 
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -17,7 +18,7 @@ public class MainWindow {
 
     public double titleBarHeight = 37.5999755859375;
 
-    public MainWindow() {
+    public MainWindow(boolean debug) {
         // Define height to calculate title bar height later
         stage.setMaxHeight(100);
         stage.setMaxWidth(100);
