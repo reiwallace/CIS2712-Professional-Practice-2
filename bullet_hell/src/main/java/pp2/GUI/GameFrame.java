@@ -6,12 +6,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import pp2.Entity.Player;
 
 public class GameFrame {
     private final Rectangle gameFrame = new Rectangle();
     private final int[] gameFrameSize = {24, 28}; // Size of gameFrame in tiles
-    private final String bgPath = "resources/images/gameBGTEST.jpg";
 
     private Image imagePath = new Image("https://i.ibb.co/YBZzsddp/game-BGTEST.jpg");
     public ImageView backgroundImage  = new ImageView(imagePath); // Background image
