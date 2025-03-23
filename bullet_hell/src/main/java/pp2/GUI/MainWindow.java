@@ -1,5 +1,7 @@
 package pp2.GUI;
 
+import java.io.FileNotFoundException;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -10,6 +12,7 @@ public class MainWindow {
     private Stage stage = new Stage();
     private GridPane pane = new GridPane();
     private Scene scene = new Scene(pane);
+    private GameFrame gameFrame;
 
     private String title = "Bullet Hell"; // Stage title
     private int rows = 30; // Number of rows in the grid pane
@@ -19,8 +22,9 @@ public class MainWindow {
 
     /** Initialises main game window
      * @param debug - Whether to load debug menu or not
+     * @throws FileNotFoundException 
      */
-    public MainWindow(boolean debug) {
+    public MainWindow(boolean debug) throws FileNotFoundException {
         // Define height to calculate title bar height later
         stage.setMaxHeight(100);
         stage.setMaxWidth(100);
@@ -41,7 +45,7 @@ public class MainWindow {
         stage.setTitle(title);
         stage.setScene(scene);
 
-        if(debug) new DebugMenu(pane);
+        if(debug) new DebugMenu(this);
     }
 
     /** Set stage to windowed mode.
@@ -60,9 +64,8 @@ public class MainWindow {
     public Stage getStage() { return stage; }
     public Scene getScene() { return scene; }
     public GridPane getGrid() { return pane; }
-    public double getTitleBarHeight() {
-
-        return titleBarHeight; }
+    public double getTitleBarHeight() { return titleBarHeight; }
+    public GameFrame getGameFrame() { return gameFrame; }
 
     /** Change stage size with an aspect ratio of 4:3 from the width.
      * @param width - Width to calculate size from
@@ -72,6 +75,10 @@ public class MainWindow {
         stage.setMaxHeight(width * 0.75);
         stage.setMinWidth(width);
         stage.setMinHeight(width * 0.75);
-
+        try { // Subtract title bar from height to get accurate size
+            gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), pane);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } 
     }
 }
