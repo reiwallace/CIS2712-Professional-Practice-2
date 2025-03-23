@@ -1,9 +1,7 @@
 package pp2.GUI;
 
 import javafx.event.EventHandler; 
-import javafx.scene.layout.GridPane;
 import pp2.Entity.Entity;
-
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
