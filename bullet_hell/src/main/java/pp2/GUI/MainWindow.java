@@ -13,6 +13,7 @@ public class MainWindow {
     private GridPane pane = new GridPane();
     private Scene scene = new Scene(pane);
     private GameFrame gameFrame;
+    private PlayerStatisticsPanel statsPanel;
 
     private String title = "Bullet Hell"; // Stage title
     private int rows = 30; // Number of rows in the grid pane
@@ -28,6 +29,7 @@ public class MainWindow {
         // Define height to calculate title bar height later
         stage.setMaxHeight(100);
         stage.setMaxWidth(100);
+
         // Create grid rows for pane
         for(int i = 0; i < rows; i++) {
             RowConstraints row = new RowConstraints();
@@ -41,10 +43,12 @@ public class MainWindow {
             pane.getColumnConstraints().add(column);
         }
 
+        // Configure stage settings
         stage.setResizable(false);
         stage.setTitle(title);
         stage.setScene(scene);
 
+        // Enable debug mode
         if(debug) new DebugMenu(this);
     }
 
@@ -58,6 +62,15 @@ public class MainWindow {
      */
     public void fullScreenMode() {
         setSize(1404);
+    }
+
+    public void startGame() {
+        try {
+            gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), pane);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        statsPanel = new PlayerStatisticsPanel(this);
     }
 
     // Getters.
@@ -75,10 +88,5 @@ public class MainWindow {
         stage.setMaxHeight(width * 0.75);
         stage.setMinWidth(width);
         stage.setMinHeight(width * 0.75);
-        try { // Subtract title bar from height to get accurate size
-            gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), pane);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } 
     }
 }

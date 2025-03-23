@@ -38,6 +38,10 @@ public class PlayerStatisticsPanel {
         grid.add(label, 29, row, 9, 3);
     }
 
+    /** 
+     * @param label - Label to set text of
+     * @param text - Text to set label to
+     */
     public void updateLabel(Label label, String text) {
         label.setText(text);
     }
