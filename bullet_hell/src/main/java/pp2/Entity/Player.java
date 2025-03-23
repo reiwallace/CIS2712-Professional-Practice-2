@@ -34,6 +34,8 @@ public class Player extends Entity {
         entityImage.setPreserveRatio(true);
         entityImage.setSmooth(true);
 
+        setHitbox(); // Initialize hitbox
+        
         // Enable keypress detection
         gameGrid.setOnKeyPressed(event -> move(event.getCode()));
 

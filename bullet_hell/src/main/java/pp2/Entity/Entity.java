@@ -25,7 +25,6 @@ public abstract class Entity {
         this.entityImage = new ImageView(new Image(imagePath));
         this.health = health;
         this.isTargetable = true; // Default: can be hit
-        setHitbox(); // Initialize hitbox
     }
 
     /** Loads an image for the entity.
@@ -40,11 +39,7 @@ public abstract class Entity {
      * @param toggle - Whether hitbox is displayed or not
      */
     public void toggleHitboxVisability(boolean toggle) {
-        if(toggle) {
-            gameFrame.setFill(Color.BLACK);
-        } else {
-            gameFrame.setFill(null);
-        }
+        entityHitbox.setVisible(toggle);
     }
 
     /** Sets the position of the entity and updates the hitbox.
@@ -68,6 +63,8 @@ public abstract class Entity {
                     entityImage.getFitWidth() * hitboxScale[0],
                     entityImage.getFitHeight() * hitboxScale[1]
             );
+            entityHitbox.setFill(Color.BLACK);
+            entityHitbox.setVisible(false);
         }
     }
 
