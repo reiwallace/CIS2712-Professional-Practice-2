@@ -1,5 +1,7 @@
 package pp2.GUI;
 
+import java.io.FileNotFoundException;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -10,6 +12,7 @@ public class MainWindow {
     private Stage stage = new Stage();
     private GridPane pane = new GridPane();
     private Scene scene = new Scene(pane);
+    private GameFrame gameFrame;
 
     private String title = "Bullet Hell"; // Stage title
     private int rows = 30; // Number of rows in the grid pane
@@ -17,7 +20,11 @@ public class MainWindow {
 
     public double titleBarHeight = 37.5999755859375;
 
-    public MainWindow() {
+    /** Initialises main game window
+     * @param debug - Whether to load debug menu or not
+     * @throws FileNotFoundException 
+     */
+    public MainWindow(boolean debug) throws FileNotFoundException {
         // Define height to calculate title bar height later
         stage.setMaxHeight(100);
         stage.setMaxWidth(100);
@@ -37,14 +44,18 @@ public class MainWindow {
         stage.setResizable(false);
         stage.setTitle(title);
         stage.setScene(scene);
+
+        if(debug) new DebugMenu(this);
     }
 
-    // Set stage to windowed mode.
+    /** Set stage to windowed mode.
+     */
     public void windowedMode() {
         setSize(920);
     }
 
-    // Set stage to fullscreen mode.
+    /** Set stage to fullscreen mode.
+     */
     public void fullScreenMode() {
         setSize(1404);
     }
@@ -53,16 +64,21 @@ public class MainWindow {
     public Stage getStage() { return stage; }
     public Scene getScene() { return scene; }
     public GridPane getGrid() { return pane; }
-    public double getTitleBarHeight() {
+    public double getTitleBarHeight() { return titleBarHeight; }
+    public GameFrame getGameFrame() { return gameFrame; }
 
-        return titleBarHeight; }
-
-    // Change stage size with an aspect ratio of 4:3 from the width.
+    /** Change stage size with an aspect ratio of 4:3 from the width.
+     * @param width - Width to calculate size from
+     */
     private void setSize(double width) {
         stage.setMaxWidth(width);
         stage.setMaxHeight(width * 0.75);
         stage.setMinWidth(width);
         stage.setMinHeight(width * 0.75);
-
+        try { // Subtract title bar from height to get accurate size
+            gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), pane);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } 
     }
 }

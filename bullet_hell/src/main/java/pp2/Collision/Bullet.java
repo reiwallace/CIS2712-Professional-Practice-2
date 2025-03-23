@@ -1,18 +1,16 @@
 package pp2.Collision;
 
+import javafx.scene.image.Image;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import pp2.ImageHandler;
 
 public class Bullet {
-
     private final double speed; // Speed of the bullet
     private ImageView bulletView;
     private Rectangle gameFrame; // The Main Game play area
-    private GridPane gamePane; // The game pane to add items to
+    private GridPane gameGrid; // The game pane to add items to
     private boolean isActive = true;
     private double x_pos; // Horizontal position
     private double y_pos; // Vertical position
@@ -20,33 +18,43 @@ public class Bullet {
     private boolean isEnemyBullet; // To identify the enemy or player bullet
     private int damage; // Depend on either enemy or player bullets, the damage is different.
 
-    public Bullet(Rectangle gameFrame, GridPane gamePane, double x_pos, double y_pos, boolean isEnemyBullet, int damage, String bulletPath) {
+    /** Initialise a bullet
+     * @param gameFrame - Area the game is played in 
+     * @param gameGrid - Window grid to attach bullet to
+     * @param x_pos - Initial X position of bullet
+     * @param y_pos - Initial Y position of bullet
+     * @param isEnemyBullet - Whether the bullet is fired from enemy or player
+     * @param damage - Damage of the bullet
+     * @param imagePath - Image URL to use for bullet
+     */
+    public Bullet(Rectangle gameFrame, GridPane gameGrid, double x_pos, double y_pos, boolean isEnemyBullet, int damage, String imagePath) {
         this.x_pos = x_pos;
         this.y_pos = y_pos;
         this.gameFrame = gameFrame;
-        this.gamePane = gamePane;
+        this.gameGrid = gameGrid;
         this.isEnemyBullet = isEnemyBullet;
         this.damage = damage;
         this.speed = isEnemyBullet ? 4.0 : -6.0; // Enemy bullets move down, player bullets move up
 
         // Set the bullet to an imageView
-        bulletView = new ImageView(ImageHandler.loadImage(bulletPath));
+        bulletView = new ImageView(new Image(imagePath));
         bulletView.setX(this.x_pos);
         bulletView.setY(this.y_pos);
 
         // Create hitbox the same size as bullet
         hitbox = new Rectangle(this.x_pos, this.y_pos, bulletView.getFitWidth(), bulletView.getFitHeight());
-        hitbox.setVisible(false); // Hide hitbox
 
         // Add the bullet to the Main gameFrame
-        this.gamePane.getChildren().addAll(bulletView, hitbox);
+        this.gameGrid.add(bulletView, 2, 1);
+        this.gameGrid.add(hitbox, 2, 1);
 
         // Move bullet
         moveBullet();
     }
 
     // Moves the bullet upwards
-    private void moveBullet(Pane gameFrame) {
+    /* UNUSED METHOD?
+    private void moveBullet(GridPane gameFrame) {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -61,10 +69,12 @@ public class Bullet {
             }
         };
         timer.start();
-    }
+    } */
 
+    /** Animation timer method to move the bullet in the appropriate ditection
+     */
     private void moveBullet() {
-        AnimationTimer timer = new AnimationTimer() {
+        AnimationTimer timer = new AnimationTimer() { // Move bullet in an animation timer
             @Override
             public void handle(long now) {
                 if (!isActive) {
@@ -86,9 +96,11 @@ public class Bullet {
         timer.start();
     }
 
+    /** Remove bullet from grid
+     */
     public void removeBullet() {
         isActive = false;
-        gamePane.getChildren().removeAll(bulletView, hitbox);
+        gameGrid.getChildren().removeAll(bulletView, hitbox);
     }
 
     // Getter/Setter methods
@@ -108,12 +120,12 @@ public class Bullet {
         this.gameFrame = gameFrame;
     }
 
-    public GridPane getgamePane() {
-        return gamePane;
+    public GridPane getgameGrid() {
+        return gameGrid;
     }
 
-    public void setGamePane(GridPane gamePane) {
-        this.gamePane = gamePane;
+    public void setgameGrid(GridPane gameGrid) {
+        this.gameGrid = gameGrid;
     }
 
     public double getSpeed() {

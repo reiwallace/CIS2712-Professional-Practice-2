@@ -2,20 +2,30 @@ package pp2.Entity;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Rectangle;
 
-public class Player extends Entity{
+public class Player extends Entity {
+    private static String playerImagePath = "https://i.ibb.co/LhYpPskV/player.png";
 
-    private final int speed; // Player movement speed
+    private int speed; // Player movement speed
     private int x_pos, y_pos; // Player position
 
+    private int lives = 5;
 
-    // Player character constructor
-    public Player(String imagePath, int health, int speed, GridPane gamePane) {
-        super(imagePath, health); // Call Entity constructor
+    /** Initialise player character
+     * @param imagePath - Image URL for player
+     * @param health - Health of the player
+     * @param speed - Speed player moves at
+     * @param gameGrid - Main window grid to attach player to
+     * @param gameFrame - Game area to restrict movement to
+     */
+    public Player(int health, int speed, GridPane gameGrid, Rectangle gameFrame) {
+        super(playerImagePath, health); // Call Entity constructor
         this.speed = speed;
-        this.gamePane = gamePane; // Assign game pane
-        this.x_pos = (int) entityImage.getLayoutX();
-        this.y_pos = (int) entityImage.getLayoutY();
+        this.gameGrid = gameGrid; // Assign main window grid
+        this.gameFrame = gameFrame; // Assign game area
+        this.x_pos = (int) entityImage.getTranslateX();
+        this.y_pos = (int) entityImage.getTranslateY();
 
         // Set player characteristics
         entityImage.setId("player");
@@ -26,16 +36,23 @@ public class Player extends Entity{
         entityImage.setPreserveRatio(true);
         entityImage.setSmooth(true);
 
+        setHitbox(); // Initialize hitbox
+
+        // Enable keypress detection
+        gameGrid.setOnKeyPressed(event -> move(event.getCode()));
+
         // Add the player to the main pane
-        gamePane.getChildren().add(getImage());
+        gameGrid.add(entityHitbox, 2, 1, 1, 3);
+        gameGrid.add(getImage(), 2, 1, 1, 3);
     }
 
-    // Moves the player based on input direction.
+    /** Moves the player based on input direction.
+     * @param key - Key press input
+     */
     @Override
     public void move(KeyCode key) {
         double newX = x_pos;
         double newY = y_pos;
-
         switch (key) {
             case LEFT:
                 newX -= speed; // Move left
@@ -52,10 +69,10 @@ public class Player extends Entity{
         }
 
         // Ensure the player does not go out of bounds
-        if (newX >= 0 && newX + entityImage.getFitWidth() <= gamePane.getWidth()) {
+        if (newX >= 0 && newX <= gameFrame.getWidth() - entityImage.getFitWidth()) {
             x_pos = (int) newX;
         }
-        if (newY >= 0 && newY + entityImage.getFitHeight() <= gamePane.getHeight()) {
+        if (newY >= 0 && newY <= gameFrame.getHeight() - entityImage.getFitHeight()) {
             y_pos = (int) newY;
         }
 
@@ -63,7 +80,9 @@ public class Player extends Entity{
         setPosition(x_pos, y_pos);
     }
 
-    // Reduces the player's health when hit.
+    /** Reduces the player's health when hit.
+     * @param damage - Damage to reduce player's health by
+     */
     @Override
     public void takeDamage(int damage) {
         setHealth(getHealth() - damage);
@@ -74,31 +93,14 @@ public class Player extends Entity{
         }
     }
 
-    // Removes the player from the pan when health reaches 0.
-
+    /** Removes the player from the grid when health reaches 0.
+     */
     @Override
     public void destroy() {
         System.out.println("Player destroyed!");
-        gamePane.getChildren().removeAll(entityImage, getHitbox());
+        gameGrid.getChildren().removeAll(entityImage, getHitbox());
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public int getX_pos() {
-        return x_pos;
-    }
-
-    public void setX_pos(int x_pos) {
-        this.x_pos = x_pos;
-    }
-
-    public int getY_pos() {
-        return y_pos;
-    }
-
-    public void setY_pos(int y_pos) {
-        this.y_pos = y_pos;
-    }
+    public int getSpeed() { return speed; }
+    public int getLives() { return lives; }
 }
