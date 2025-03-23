@@ -10,6 +10,8 @@ public class Player extends Entity {
     private int speed; // Player movement speed
     private int x_pos, y_pos; // Player position
 
+    private int lives = 5;
+
     /** Initialise player character
      * @param imagePath - Image URL for player
      * @param health - Health of the player
@@ -35,7 +37,7 @@ public class Player extends Entity {
         entityImage.setSmooth(true);
 
         setHitbox(); // Initialize hitbox
-        
+
         // Enable keypress detection
         gameGrid.setOnKeyPressed(event -> move(event.getCode()));
 
@@ -100,4 +102,5 @@ public class Player extends Entity {
     }
 
     public int getSpeed() { return speed; }
+    public int getLives() { return lives; }
 }
