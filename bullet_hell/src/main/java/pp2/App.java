@@ -1,12 +1,9 @@
 package pp2;
 
 import java.io.IOException;
-import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pp2.Entity.Player;
-import pp2.GUI.GameFrame;
 import pp2.GUI.MainWindow;
 
 public class App extends Application {
