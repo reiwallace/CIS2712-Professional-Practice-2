@@ -22,7 +22,7 @@ public class DebugMenu {
      * @param mainWindow - Window entities are attached to
      */
     private void configureToggleHitboxes(MainWindow mainWindow) {
-        toggleHitboxes.setVisible(true); // Sets button to visable
+        toggleHitboxes.setVisible(true); // Sets button to visible
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { // Creates a method to be ran when button is pressed
             public void handle(ActionEvent e) 
             { 

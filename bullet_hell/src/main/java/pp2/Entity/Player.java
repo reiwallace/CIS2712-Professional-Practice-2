@@ -12,7 +12,6 @@ public class Player extends Entity {
     private int lives = 5;
 
     /** Initialise player character
-     * @param imagePath - Image URL for player
      * @param health - Health of the player
      * @param speed - Speed player moves at
      * @param gameGrid - Main window grid to attach player to

@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import pp2.Entity.Enemy;
 import pp2.Entity.Player;
 
 public class GameFrame {
@@ -20,6 +21,7 @@ public class GameFrame {
     private ImageView backgroundImage  = new ImageView(imagePath); // Background image
 
     private Player player;
+    private Enemy enemy;
 
     /** Set up default game frame with its size
      * @param sceneHeight - Height of scene to size area by
@@ -40,6 +42,7 @@ public class GameFrame {
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
 
         player = new Player(10, 5, mainGrid, gameFrame); // Initialise player character
+        enemy = new Enemy(10, 5, mainGrid, gameFrame);
     }
 
     // Setters and getters
