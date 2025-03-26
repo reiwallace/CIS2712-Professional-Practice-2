@@ -2,7 +2,6 @@ package pp2.Entity;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -46,7 +45,7 @@ public abstract class Entity {
      * @param x - X position to set entity to
      * @param y - Y position to set entity to
      */
-    public void setPosition(int x, int y) {
+    public void setPosition(double x, double y) {
         // Update character image position
         entityImage.setTranslateX(x);
         entityImage.setTranslateY(y);
@@ -74,7 +73,10 @@ public abstract class Entity {
     public boolean isTargetable() { return isTargetable; }
     public ImageView getImage() { return entityImage; }
     public GridPane getgameGrid() { return gameGrid; }
-    public double[] getPos() { return new double[] {entityImage.getLayoutX(), entityImage.getLayoutY()}; }
+    /** Returns an array cotaining positions [x, y]
+     * @return - Array [x, y]
+     */
+    public double[] getPos() { return new double[] {entityImage.getTranslateX(), entityImage.getTranslateY()}; }
 
     // Setters
     public void setHealth(int health) { this.health = health; }
@@ -82,7 +84,6 @@ public abstract class Entity {
     public void setgameGrid(GridPane gameGrid) { this.gameGrid = gameGrid; }
 
     // Abstract methods (must be implemented in subclasses)
-    public abstract void move(KeyCode code);
     public abstract void takeDamage(int damage);
     public abstract void destroy();
 }

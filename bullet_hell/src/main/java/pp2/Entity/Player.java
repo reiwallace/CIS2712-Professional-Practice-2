@@ -1,6 +1,5 @@
 package pp2.Entity;
 
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
@@ -38,47 +37,13 @@ public class Player extends Entity {
 
         setHitbox(); // Initialize hitbox
 
-        // Enable keypress detection
-        gameGrid.setOnKeyPressed(event -> move(event.getCode()));
+        GameplayInputs m = new GameplayInputs(this, gameGrid, gameFrame, speed);
 
         // Add the player to the main pane
         gameGrid.add(entityHitbox, 2, 1, 1, 3);
         gameGrid.add(getImage(), 2, 1, 1, 3);
     }
 
-    /** Moves the player based on input direction.
-     * @param key - Key press input
-     */
-    @Override
-    public void move(KeyCode key) {
-        double newX = x_pos;
-        double newY = y_pos;
-        switch (key) {
-            case LEFT:
-                newX -= speed; // Move left
-                break;
-            case RIGHT:
-                newX += speed; // Move right
-                break;
-            case UP:
-                newY -= speed; // Move up
-                break;
-            case DOWN:
-                newY += speed; // Move down
-                break;
-        }
-
-        // Ensure the player does not go out of bounds
-        if (newX >= 0 && newX <= gameFrame.getWidth() - entityImage.getFitWidth()) {
-            x_pos = (int) newX;
-        }
-        if (newY >= 0 && newY <= gameFrame.getHeight() - entityImage.getFitHeight()) {
-            y_pos = (int) newY;
-        }
-
-        // Update position
-        setPosition(x_pos, y_pos);
-    }
 
     /** Reduces the player's health when hit.
      * @param damage - Damage to reduce player's health by

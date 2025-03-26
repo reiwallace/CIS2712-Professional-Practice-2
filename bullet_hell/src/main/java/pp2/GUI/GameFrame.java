@@ -39,7 +39,7 @@ public class GameFrame {
         mainGrid.add(gameFrame, 2, 1, 24, 28); // Add the game window to the game frame 2 columns in and 1 row down
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
 
-        player = new Player(10, 10, mainGrid, gameFrame); // Initialise player character
+        player = new Player(10, 5, mainGrid, gameFrame); // Initialise player character
     }
 
     // Setters and getters
