@@ -1,11 +1,14 @@
 package pp2.GUI;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class MainWindow {
@@ -18,6 +21,12 @@ public class MainWindow {
     private String title = "Bullet Hell"; // Stage title
     private int rows = 30; // Number of rows in the grid pane
     private int columns = 40; // Number of columns in the grid pane
+
+    private final int gameRowSpan = 28;
+    private final int gameColumnSpan = 24;
+    private final int gameInitialRow = 1;
+    private final int gameInitialColumn = 2;
+    private ArrayList
 
     public double titleBarHeight = 37.5999755859375;
 
@@ -36,11 +45,18 @@ public class MainWindow {
             row.setPercentHeight(100.0 / rows);
             pane.getRowConstraints().add(row);
         }
-        // Create grid columns for pane
+        // Create grid columns for pane and add backdrop 
         for(int i = 0; i < columns; i++) {
             ColumnConstraints column = new ColumnConstraints();
             column.setPercentWidth(100.0 / columns);
             pane.getColumnConstraints().add(column);
+
+            Rectangle squaretangle = new Rectangle();
+            squaretangle.setWidth(5);
+            squaretangle.setHeight(5);
+            squaretangle.setVisible(true);
+            squaretangle.setFill(Color.BLACK);
+            pane.add(squaretangle, i, i);
         }
 
         // Configure stage settings
