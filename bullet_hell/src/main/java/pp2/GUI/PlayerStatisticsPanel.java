@@ -27,7 +27,7 @@ public class PlayerStatisticsPanel {
         updateLabel(livesDisplay, "Lives: " + player.getLives());
     }
 
-    /** Sets up a lable with the correct size visability and position.
+    /** Sets up a label with the correct size visibility and position.
      * @param label - Label to configure
      * @param grid - Grid to attach label to
      * @param row - Row to place label on

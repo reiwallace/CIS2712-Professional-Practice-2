@@ -14,16 +14,6 @@ public class App extends Application {
         gameStage.show();
         gameWindow.windowedMode(); // Set default screen mode
         gameWindow.startGame();
-
-        // Uses rectangles to show game area
-        /*for(int y = 0; y < 30; y++) {
-            for(int x = 0; x < 40; x++) {
-                Rectangle rectangle = new Rectangle();
-                rectangle.setHeight(10);
-                rectangle.setWidth(10);
-                gameWindow.getGrid().add(rectangle, x, y);
-            }
-        }*/
     }
 
 
