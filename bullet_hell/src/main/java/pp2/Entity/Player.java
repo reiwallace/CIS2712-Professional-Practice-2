@@ -4,7 +4,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity {
-    private static String playerImagePath = "https://i.ibb.co/LhYpPskV/player.png";
+    private static String playerImageURL = "https://i.ibb.co/LhYpPskV/player.png";
 
     private int speed; // Player movement speed
     private int x_pos, y_pos; // Player position
@@ -16,9 +16,10 @@ public class Player extends Entity {
      * @param speed - Speed player moves at
      * @param gameGrid - Main window grid to attach player to
      * @param gameFrame - Game area to restrict movement to
+     * @param id - id of entity
      */
-    public Player(int health, int speed, GridPane gameGrid, Rectangle gameFrame) {
-        super(playerImagePath, health); // Call Entity constructor
+    public Player(int health, int speed, GridPane gameGrid, Rectangle gameFrame, int id) {
+        super(playerImageURL, health, id); // Call Entity constructor
         this.speed = speed;
         this.gameGrid = gameGrid; // Assign main window grid
         this.gameFrame = gameFrame; // Assign game area
@@ -27,12 +28,6 @@ public class Player extends Entity {
 
         // Set player characteristics
         entityImage.setId("player");
-        entityImage.setFitWidth(50);
-        entityImage.setFitHeight(50);
-        entityImage.setFocusTraversable(true);
-        entityImage.setPickOnBounds(true);
-        entityImage.setPreserveRatio(true);
-        entityImage.setSmooth(true);
 
         setHitbox(); // Initialize hitbox
 

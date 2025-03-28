@@ -13,6 +13,7 @@ public abstract class Entity {
     protected boolean isTargetable; // Whether entity can be hit or not
     protected GridPane gameGrid; // Reference to the game pane
     protected Rectangle gameFrame; // Reference to the game frame
+    protected int entityId; // ID of entity
 
     private final int[] hitboxScale = {1, 1};
 
@@ -20,10 +21,17 @@ public abstract class Entity {
      * @param imagePath - Image URL to use for entity
      * @param health - Health of entity
      */
-    public Entity(String imagePath, int health) {
+    public Entity(String imagePath, int health, int id) {
         this.entityImage = new ImageView(new Image(imagePath));
         this.health = health;
+        this.entityId = id;
         this.isTargetable = true; // Default: can be hit
+
+        setFitSize(50, 50);
+        entityImage.setFocusTraversable(true);
+        entityImage.setPickOnBounds(true);
+        entityImage.setPreserveRatio(true);
+        entityImage.setSmooth(true);
     }
 
     /** Loads an image for the entity.
@@ -65,6 +73,16 @@ public abstract class Entity {
             entityHitbox.setFill(Color.BLACK);
             entityHitbox.setVisible(false);
         }
+    }
+
+    /** Set Fit size of the entity image
+     * @param width - width
+     * @param height - height
+     */
+    public void setFitSize(int width, int height) { 
+        entityImage.setFitWidth(width);
+        entityImage.setFitHeight(height);
+        setHitbox();
     }
 
     // Getters

@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import pp2.Entity.Enemy;
 import pp2.Entity.Player;
+import pp2.Entity.Enemies.Enemy;
 
 public class GameFrame {
     private final Rectangle gameFrame = new Rectangle();
@@ -41,8 +41,8 @@ public class GameFrame {
         mainGrid.add(gameFrame, 2, 1, 24, 28); // Add the game window to the game frame 2 columns in and 1 row down
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
 
-        player = new Player(10, 5, mainGrid, gameFrame); // Initialise player character
-        enemy = new Enemy(10, 5, mainGrid, gameFrame);
+        player = new Player(10, 5, mainGrid, gameFrame, 1); // Initialise player character
+        enemy = new Enemy(10, 5, mainGrid, gameFrame, 2);
     }
 
     // Setters and getters

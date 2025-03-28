@@ -1,4 +1,4 @@
-package pp2.Entity;
+package pp2.Entity.Enemies;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -8,14 +8,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import pp2.Collision.Bullet;
+import pp2.Entity.Entity;
 
 import java.util.Random;
 
 public class Enemy extends Entity {
 
-    private static String enemyImagePath = "";
-    private double x_pos;
-    private double y_pos;
+    private static String enemyImageURL = "https://i.ibb.co/LhYpPskV/player.png";
     private int damage;
     private Timeline shootTimer;
     private AnimationTimer positionTracker;
@@ -26,24 +25,17 @@ public class Enemy extends Entity {
      * @param damage Damage dealt to the player
      * @param gameGrid The game pane to spawn in
      * @param gameFrame - Game area to restrict movement to
+     * @param id - Id of entity
      */
-    public Enemy(int health, int damage, GridPane gameGrid, Rectangle gameFrame) {
-        super(enemyImagePath, health); // Entity handles image loading
+    public Enemy(int health, int damage, GridPane gameGrid, Rectangle gameFrame, int id) {
+        super(enemyImageURL, health, id); // Entity handles image loading
         this.gameGrid = gameGrid;
         this.gameFrame = gameFrame;
         this.damage = damage;
 
-        // Sprite characteristics
-        entityImage.setFitWidth(50);
-        entityImage.setFitHeight(50);
-        entityImage.setFocusTraversable(true);
-        entityImage.setPickOnBounds(true);
-        entityImage.setPreserveRatio(true);
-        entityImage.setSmooth(true);
-
         // Set random spawn position
         Random random = new Random();
-        entityImage.setLayoutX(random.nextInt((int) gameGrid.getPrefWidth())); // Enemy appears randomly on the pane.
+        entityImage.setLayoutX(random.nextInt((int) gameFrame.getPreferredWidth())); // Enemy appears randomly on the pane.
         entityImage.setLayoutY(0);
 
         // Ensure enemy spawns inside pane bounds !!ANOTHER WAY TO GET SAME RESULT AS ABOVE.!!
@@ -54,9 +46,6 @@ public class Enemy extends Entity {
         y_pos = 0;
         entityImage.setLayoutX(x_pos);
         entityImage.setLayoutY(y_pos);*/
-
-        // Initialize hitbox
-        setHitbox();
 
         // Add enemy to gamePane
         gameGrid.getChildren().addAll(getImage(), getHitbox());
@@ -76,8 +65,8 @@ public class Enemy extends Entity {
         positionTracker = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                x_pos = getImage().getLayoutX() + getImage().getTranslateX();
-                y_pos = getImage().getLayoutY() + getImage().getTranslateY();
+                double x_pos = getImage().getLayoutX() + getImage().getTranslateX();
+                double y_pos = getImage().getLayoutY() + getImage().getTranslateY();
 
                 getHitbox().setLayoutX(x_pos);
                 getHitbox().setLayoutY(y_pos);
@@ -123,53 +112,18 @@ public class Enemy extends Entity {
     }
 
     private void shoot() {
-        double bulletX = x_pos + getImage().getFitWidth() / 2;
-        double bulletY = y_pos + getImage().getFitHeight();
+        double bulletX = getPos()[0] + getImage().getFitWidth() / 2;
+        double bulletY = getPos()[1] + getImage().getFitHeight();
 
         System.out.println("Enemy shoots from: X=" + bulletX + " Y=" + bulletY);
 
         System.out.println("Enemy shoots from: X=" + bulletX + " Y=" + bulletY);
-        Bullet enemyBullet = new Bullet(gameFrame, gameGrid, bulletX, bulletY, true, 10, "");
+        Bullet enemyBullet = new Bullet(gameFrame, gameGrid, bulletX, bulletY, true, 10, "https://cdn-icons-png.flaticon.com/256/32/32463.png");
     }
 
     // Optional getters for x and y
-    public double getX() {
-        return x_pos;
-    }
-
-    public double getY() {
-        return y_pos;
-    }
-
-    public static String getEnemyImagePath() {
-        return enemyImagePath;
-    }
-
-    public static void setEnemyImagePath(String enemyImagePath) {
-        Enemy.enemyImagePath = enemyImagePath;
-    }
-
-    public double getX_pos() {
-        return x_pos;
-    }
-
-    public void setX_pos(double x_pos) {
-        this.x_pos = x_pos;
-    }
-
-    public double getY_pos() {
-        return y_pos;
-    }
-
-    public void setY_pos(double y_pos) {
-        this.y_pos = y_pos;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
+    public static String getEnemyImagePath() { return enemyImageURL; }
+    public static void setEnemyImagePath(String enemyImageURL) { Enemy.enemyImageURL = enemyImageURL; }
+    public int getDamage() { return damage; }
+    public void setDamage(int damage) { this.damage = damage; }
 }
