@@ -26,7 +26,7 @@ public class MainWindow {
     private final int gameColumnSpan = 24;
     private final int gameInitialRow = 1;
     private final int gameInitialColumn = 2;
-    private ArrayList
+    private ArrayList<Rectangle> backDrop = new ArrayList<Rectangle>();
 
     public double titleBarHeight = 37.5999755859375;
 
@@ -50,13 +50,21 @@ public class MainWindow {
             ColumnConstraints column = new ColumnConstraints();
             column.setPercentWidth(100.0 / columns);
             pane.getColumnConstraints().add(column);
+        }
 
-            Rectangle squaretangle = new Rectangle();
-            squaretangle.setWidth(5);
-            squaretangle.setHeight(5);
-            squaretangle.setVisible(true);
-            squaretangle.setFill(Color.BLACK);
-            pane.add(squaretangle, i, i);
+        // Add backdrop for window
+        for(int i = 0; i < 40; i++) {
+            for(int x = 0; x < 30; x++) {
+                if((i < 2 || i > 26) || (x < 1 || x > 28)) {
+                    Rectangle squaretangle = new Rectangle();
+                    squaretangle.setWidth(0);
+                    squaretangle.setHeight(0);
+                    squaretangle.setVisible(true);
+                    squaretangle.setFill(Color.WHITE);
+                    pane.add(squaretangle, i, x);
+                    backDrop.add(squaretangle);
+                }
+            }
         }
 
         // Configure stage settings
@@ -104,5 +112,13 @@ public class MainWindow {
         stage.setMaxHeight(width * 0.75);
         stage.setMinWidth(width);
         stage.setMinHeight(width * 0.75);
+        resizeBackdrop();
+    }
+
+    private void resizeBackdrop() {
+        for(int i = 0; i < backDrop.size(); i++) {
+            backDrop.get(i).setWidth(stage.getWidth()/40 + 1);
+            backDrop.get(i).setHeight((stage.getHeight() - titleBarHeight)/30 + 1);
+        }
     }
 }
