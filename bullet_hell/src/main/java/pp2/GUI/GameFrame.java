@@ -44,8 +44,6 @@ public class GameFrame {
         player = new Player(10, 5, mainGrid, gameFrame, 1); // Initialise player character
         //enemy = new Enemy(10, 5, mainGrid, gameFrame, 2);
         
-        System.out.println("a");
-        System.out.println(mainGrid.getChildren());
     }
 
     // Setters and getters

@@ -10,8 +10,8 @@ public abstract class AbstractLevel {
     public AbstractLevel() {}
 
     /** Spawns an enemy at a set time with a set despawn time.
-     * @param spawnDelay - Time after starting the level to spawn an enemy
-     * @param despawnDelay - Time after spawning the enemy to despawn the enemy
+     * @param spawnDelay - Time after starting the level to spawn an enemy in seconds
+     * @param despawnDelay - Time after spawning the enemy to despawn the enemy in seconds
      * @param enemy - Enemy to spawn
      * @param movementPattern - Enemy movement pattern
      * @param entryPosition - [x, y] coordinates to spawn enemy at
@@ -34,5 +34,13 @@ public abstract class AbstractLevel {
             }
         };
         despawnTimer.schedule(despawnEnemy, despawnDelay * 1000);
+    }
+
+    private void findClosestEdge(Entity entity) {
+        if(entity == null) return;
+        Double x = entity.getPos()[0];
+        Double y = entity.getPos()[1];
+
+        
     }
 }

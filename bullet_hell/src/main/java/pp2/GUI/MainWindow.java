@@ -59,7 +59,7 @@ public class MainWindow {
                     Rectangle squaretangle = new Rectangle();
                     squaretangle.setWidth(0);
                     squaretangle.setHeight(0);
-                    squaretangle.setVisible(true);
+                    squaretangle.setVisible(false);
                     squaretangle.setFill(Color.WHITE);
                     pane.add(squaretangle, i, x);
                     backDrop.add(squaretangle);
