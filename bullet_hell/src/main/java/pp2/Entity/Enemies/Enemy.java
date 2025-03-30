@@ -96,12 +96,16 @@ public class Enemy extends Entity {
         shootTimer.play();
     }
 
+    /* Stops bullet firing loop
+     */
     private void stopShooting() {
         if (shootTimer != null) {
             shootTimer.stop();
         }
     }
 
+    /** Shoots a bullet below the enemy
+     */
     private void shoot() {
         System.out.println("Enemy shoots from: X=" + getPos()[0] + " Y=" + getPos()[1] + getPos()[1] / 2);
         Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10, "https://i.ibb.co/RpGfBNNN/bullet-Photoroom.png");
