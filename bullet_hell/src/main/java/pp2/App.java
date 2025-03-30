@@ -9,7 +9,7 @@ import pp2.GUI.MainWindow;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        MainWindow gameWindow = new MainWindow(false);
+        MainWindow gameWindow = new MainWindow(true);
         Stage gameStage = gameWindow.getStage();
         gameStage.show();
         gameWindow.windowedMode(); // Set default screen mode

@@ -9,6 +9,12 @@ public class GameplayInputs {
     private Rectangle gameFrame;
     private int speed;
     
+    /** Creates keyboard input detection for the character
+     * @param player - The player entity to assign inputs to
+     * @param gameGrid - Grid to enable inputs on
+     * @param gameFrame - Game frame to check boundries of
+     * @param speed - Speed to move player at
+     */
     public GameplayInputs(Player player, GridPane gameGrid, Rectangle gameFrame, int speed) {
         this.player = player;
         this.gameFrame = gameFrame;

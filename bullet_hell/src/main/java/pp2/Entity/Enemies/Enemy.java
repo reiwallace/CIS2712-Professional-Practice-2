@@ -1,14 +1,12 @@
 package pp2.Entity.Enemies;
 
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import pp2.Collision.Bullet;
+import pp2.Entity.Bullet;
 import pp2.Entity.Entity;
+import pp2.GUI.MainWindow;
 
 import java.util.Random;
 
@@ -17,7 +15,6 @@ public class Enemy extends Entity {
     private static String enemyImageURL = "https://i.ibb.co/LhYpPskV/player.png";
     private int damage;
     private Timeline shootTimer;
-    private AnimationTimer positionTracker;
 
     /**
      * Constructor for Enemy
@@ -27,34 +24,26 @@ public class Enemy extends Entity {
      * @param gameFrame - Game area to restrict movement to
      * @param id - Id of entity
      */
-    public Enemy(int health, int damage, GridPane gameGrid, Rectangle gameFrame, int id) {
-        super(enemyImageURL, health, id); // Entity handles image loading
-        this.gameGrid = gameGrid;
+    public Enemy(int health, int damage, MainWindow mainWindow, Rectangle gameFrame, int id) {
+        super(enemyImageURL, health, 2, mainWindow, gameFrame); // Entity handles image loading
         this.gameFrame = gameFrame;
         this.damage = damage;
 
         // Set random spawn position
         Random random = new Random();
-        entityImage.setLayoutX(random.nextInt((int) gameFrame.getPreferredWidth())); // Enemy appears randomly on the pane.
-        entityImage.setLayoutY(0);
-
-        // Ensure enemy spawns inside pane bounds !!ANOTHER WAY TO GET SAME RESULT AS ABOVE.!!
-        /*double enemyWidth = entityImage.getFitWidth();
-        double maxX = gameGrid.getWidth() - enemyWidth;
-        Random random = new Random();
-        x_pos = random.nextDouble() * maxX;
-        y_pos = 0;
-        entityImage.setLayoutX(x_pos);
-        entityImage.setLayoutY(y_pos);*/
+        setPosition(random.nextInt((int) gameFrame.getWidth()), 0);
 
         // Add enemy to gamePane
-        gameGrid.getChildren().addAll(getImage(), getHitbox());
+        addEntity(1, 3);
+
+        entityImage.setRotate(180);
+        toggleHitboxVisability(true);
 
         // Start moving and shooting
-        moveDown();
         startShooting();
     }
 
+    /* Redundant
     public void moveDown() {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(10), getImage());
         transition.setByY(400);
@@ -78,7 +67,7 @@ public class Enemy extends Entity {
             positionTracker.stop();
             destroy();
         });
-    }
+    } */
 
     @Override
     public void takeDamage(int damage) {
@@ -93,8 +82,8 @@ public class Enemy extends Entity {
     @Override
     public void destroy() {
         stopShooting();
-        if (this.gameGrid != null) {
-            gameGrid.getChildren().removeAll(getImage(), getHitbox());
+        if (this.mainWindow != null) {
+            mainWindow.getGrid().getChildren().removeAll(getImage(), getHitbox());
         }
         System.out.println("Enemy destroyed!");
     }
@@ -112,13 +101,8 @@ public class Enemy extends Entity {
     }
 
     private void shoot() {
-        double bulletX = getPos()[0] + getImage().getFitWidth() / 2;
-        double bulletY = getPos()[1] + getImage().getFitHeight();
-
-        System.out.println("Enemy shoots from: X=" + bulletX + " Y=" + bulletY);
-
-        System.out.println("Enemy shoots from: X=" + bulletX + " Y=" + bulletY);
-        Bullet enemyBullet = new Bullet(gameFrame, gameGrid, bulletX, bulletY, true, 10, "https://cdn-icons-png.flaticon.com/256/32/32463.png");
+        System.out.println("Enemy shoots from: X=" + getPos()[0] + " Y=" + getPos()[1] + getPos()[1] / 2);
+        Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10, "https://i.ibb.co/RpGfBNNN/bullet-Photoroom.png");
     }
 
     // Optional getters for x and y

@@ -2,16 +2,16 @@ package pp2.Entity;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import pp2.GUI.MainWindow;
 
 public abstract class Entity {
     protected ImageView entityImage; // Image to display on entity
     protected int health; // Starting health of entity
     protected Rectangle entityHitbox; // Hitbox of entity
     protected boolean isTargetable; // Whether entity can be hit or not
-    protected GridPane gameGrid; // Reference to the game pane
+    protected MainWindow mainWindow; // Main window to attach entity to
     protected Rectangle gameFrame; // Reference to the game frame
     protected int entityId; // ID of entity
 
@@ -20,18 +20,25 @@ public abstract class Entity {
     /** Initialise an entity
      * @param imagePath - Image URL to use for entity
      * @param health - Health of entity
+     * @param id - Numeric Id of entity
+     * @param mainWindow - Main window to get grid from
+     * @param gameFrame - Game frame to check bounds of
      */
-    public Entity(String imagePath, int health, int id) {
+    public Entity(String imagePath, int health, int id, MainWindow mainWindow, Rectangle gameFrame) {
         this.entityImage = new ImageView(new Image(imagePath));
         this.health = health;
         this.entityId = id;
+        this.gameFrame = gameFrame;
         this.isTargetable = true; // Default: can be hit
+        this.mainWindow = mainWindow;
 
         setFitSize(50, 50);
         entityImage.setFocusTraversable(true);
         entityImage.setPickOnBounds(true);
         entityImage.setPreserveRatio(true);
         entityImage.setSmooth(true);
+
+        setHitbox();
     }
 
     /** Loads an image for the entity.
@@ -85,12 +92,21 @@ public abstract class Entity {
         setHitbox();
     }
 
+    /** Adds entity and hitbox to grid (columnspan and rowspan based on image size)
+     * @param column - Columnspan of entity
+     * @param row - Rowspan of entity
+     */
+    public void addEntity(int column, int row) {
+        mainWindow.getGrid().add(entityImage, 2, 1, column, row);
+        mainWindow.getGrid().add(entityHitbox, 2, 1, column, row);
+    }
+
     // Getters
     public int getHealth() { return health; }
     public Rectangle getHitbox() { return entityHitbox; }
     public boolean isTargetable() { return isTargetable; }
     public ImageView getImage() { return entityImage; }
-    public GridPane getgameGrid() { return gameGrid; }
+
     /** Returns an array cotaining positions [x, y]
      * @return - Array [x, y]
      */
@@ -99,7 +115,6 @@ public abstract class Entity {
     // Setters
     public void setHealth(int health) { this.health = health; }
     public void setIsTargetable(boolean targetable) { this.isTargetable = targetable; }
-    public void setgameGrid(GridPane gameGrid) { this.gameGrid = gameGrid; }
 
     // Abstract methods (must be implemented in subclasses)
     public abstract void takeDamage(int damage);

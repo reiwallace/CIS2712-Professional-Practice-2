@@ -90,7 +90,7 @@ public class MainWindow {
 
     public void startGame() {
         try {
-            gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), pane);
+            gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), this);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -26,7 +26,7 @@ public class DebugMenu {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { // Creates a method to be ran when button is pressed
             public void handle(ActionEvent e) 
             { 
-                ArrayList<Entity> entities = new ArrayList<Entity>(); 
+                ArrayList<Entity> entities = mainWindow.getGameFrame().getEntities(); 
                 entities.add(mainWindow.getGameFrame().getPlayer());
                 if(toggleHitboxes.getId() != null && toggleHitboxes.getId().equals("21")) { // If button is ID 21 -- Toggles each press
                     for(int i = 0; i < entities.size(); i++) {

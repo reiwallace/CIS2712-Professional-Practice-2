@@ -2,6 +2,7 @@ package pp2.Entity;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+import pp2.GUI.MainWindow;
 
 public class Player extends Entity {
     private static String playerImageURL = "https://i.ibb.co/LhYpPskV/player.png";
@@ -18,24 +19,16 @@ public class Player extends Entity {
      * @param gameFrame - Game area to restrict movement to
      * @param id - id of entity
      */
-    public Player(int health, int speed, GridPane gameGrid, Rectangle gameFrame, int id) {
-        super(playerImageURL, health, id); // Call Entity constructor
+    public Player(int health, int speed, MainWindow mainWindow, Rectangle gameFrame, int id) {
+        super(playerImageURL, health, 1, mainWindow, gameFrame); // Call Entity constructor
         this.speed = speed;
-        this.gameGrid = gameGrid; // Assign main window grid
         this.gameFrame = gameFrame; // Assign game area
         this.x_pos = (int) entityImage.getTranslateX();
         this.y_pos = (int) entityImage.getTranslateY();
 
-        // Set player characteristics
-        entityImage.setId("player");
-
-        setHitbox(); // Initialize hitbox
-
-        GameplayInputs m = new GameplayInputs(this, gameGrid, gameFrame, speed);
-
-        // Add the player to the main pane
-        gameGrid.add(entityHitbox, 2, 1, 1, 3);
-        gameGrid.add(getImage(), 2, 1, 1, 3);
+        // Enable controls and add player to grid
+        GameplayInputs movements = new GameplayInputs(this, mainWindow.getGrid(), gameFrame, speed);
+        addEntity(1, 3);
     }
 
 
@@ -57,7 +50,7 @@ public class Player extends Entity {
     @Override
     public void destroy() {
         System.out.println("Player destroyed!");
-        gameGrid.getChildren().removeAll(entityImage, getHitbox());
+        mainWindow.getGrid().getChildren().removeAll(entityImage, getHitbox());
     }
 
     public int getSpeed() { return speed; }
