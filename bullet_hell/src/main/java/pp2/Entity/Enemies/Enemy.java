@@ -88,6 +88,8 @@ public class Enemy extends Entity {
         System.out.println("Enemy destroyed!");
     }
 
+    /** Begins a loop where the entity fires bullet every 2 seconds
+     */
     private void startShooting() {
         shootTimer = new Timeline(new KeyFrame(Duration.seconds(2), e -> shoot()));
         shootTimer.setCycleCount(Timeline.INDEFINITE);

@@ -48,7 +48,6 @@ public class GameplayInputs {
                 }
                 break;
         }
-        System.out.println(player.getPos()[0] + " " + player.getPos()[1]);
     }
 
     /** Checks whether a new X coordinate is outside the game border
