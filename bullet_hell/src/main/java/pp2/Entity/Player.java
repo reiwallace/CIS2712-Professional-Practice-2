@@ -1,6 +1,5 @@
 package pp2.Entity;
 
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;
 

@@ -54,42 +54,34 @@ public class GameplayInputs {
         // up movement
         else if(upPressed == true && leftPressed == false && rightPressed == false) {
             direction = "up";
-
         }
         // down movement
         else if(downPressed == true && leftPressed == false && rightPressed == false) {
             direction = "down";
-
         }
         // left movement
         else if(leftPressed == true && upPressed == false && downPressed == false) {
             direction = "left"; 
-
         }
         // right movement
         else if(rightPressed == true && upPressed == false && downPressed == false) {
             direction = "right";
-
         }
         // left-up movement
         else if(upPressed == true && leftPressed == true) {
             direction = "left-up";
-
         }
         // right-up movement
         else if(upPressed == true && rightPressed == true) {
             direction = "right-up";
-
         }
         // left-down movement
         else if(downPressed == true && leftPressed == true) {
             direction = "left-down";
-
         }
         // right-down movement
         else if(downPressed == true && rightPressed == true) {
             direction = "right-down";
-
         }
         // no keys no movement
         else {
@@ -102,7 +94,6 @@ public class GameplayInputs {
                 if(!checkBorderY(player.getPos()[1] - speed)) {
                     player.setPosition((int) player.getPos()[0], (int) player.getPos()[1] - speed); // Move up
                 }
-
             break;
             case "down":
                 if(!checkBorderY(player.getPos()[1] + speed)) {
@@ -157,7 +148,6 @@ public class GameplayInputs {
 
     // Upon release of key converts move direction back into false.
     public void moveChecker(KeyCode key) {
-
         if(key == KeyCode.LEFT) {
             leftPressed = false;
         }
