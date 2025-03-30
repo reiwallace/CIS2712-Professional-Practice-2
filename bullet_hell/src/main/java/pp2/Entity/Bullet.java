@@ -31,6 +31,7 @@ public class Bullet extends Entity {
         setPosition(initialX, initialY);
         addEntity(1, 3);
 
+        setIsTargetable(false);
         // Move bullet
         moveBullet();
     }

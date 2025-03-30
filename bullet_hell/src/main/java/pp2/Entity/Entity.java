@@ -117,6 +117,12 @@ public abstract class Entity {
     public void setIsTargetable(boolean targetable) { this.isTargetable = targetable; }
 
     // Abstract methods (must be implemented in subclasses)
+    /** Deal damage to the entity's health bar
+     * @param damage - Damage to deal
+     */
     public abstract void takeDamage(int damage);
+
+    /** Destroy the entity removing them from the screen
+     */
     public abstract void destroy();
 }

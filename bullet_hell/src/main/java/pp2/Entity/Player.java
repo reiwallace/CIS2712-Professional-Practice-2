@@ -7,7 +7,6 @@ public class Player extends Entity {
     private static String playerImageURL = "https://i.ibb.co/LhYpPskV/player.png";
 
     private int speed; // Player movement speed
-    private int x_pos, y_pos; // Player position
 
     private int lives = 5;
 
@@ -22,8 +21,6 @@ public class Player extends Entity {
         super(playerImageURL, health, 1, mainWindow, gameFrame); // Call Entity constructor
         this.speed = speed;
         this.gameFrame = gameFrame; // Assign game area
-        this.x_pos = (int) entityImage.getTranslateX();
-        this.y_pos = (int) entityImage.getTranslateY();
 
         // Enable controls and add player to grid
         GameplayInputs movements = new GameplayInputs(this, mainWindow.getGrid(), gameFrame, speed);

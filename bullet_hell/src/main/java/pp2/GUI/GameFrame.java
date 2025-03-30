@@ -3,7 +3,6 @@ package pp2.GUI;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import javafx.geometry.HorizontalDirection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -12,7 +11,6 @@ import javafx.scene.shape.Rectangle;
 import pp2.Entity.Entity;
 import pp2.Entity.Player;
 import pp2.Entity.Enemies.Enemy;
-import pp2.Entity.MovementPatterns.HorizontalPattern;
 
 public class GameFrame {
     private final Rectangle gameFrame = new Rectangle();

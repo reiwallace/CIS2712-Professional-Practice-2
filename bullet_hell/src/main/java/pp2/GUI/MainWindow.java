@@ -88,6 +88,8 @@ public class MainWindow {
         setSize(1404);
     }
 
+    /** Starts the game and enables stats panel
+     */
     public void startGame() {
         try {
             gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), this);
@@ -115,6 +117,8 @@ public class MainWindow {
         resizeBackdrop();
     }
 
+    /** Resize squares behind the screen
+     */
     private void resizeBackdrop() {
         for(int i = 0; i < backDrop.size(); i++) {
             backDrop.get(i).setWidth(stage.getWidth()/40 + 1);
