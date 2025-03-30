@@ -37,7 +37,6 @@ public class Enemy extends Entity {
         addEntity(1, 3);
 
         entityImage.setRotate(180);
-        toggleHitboxVisability(true);
 
         // Start moving and shooting
         startShooting();
@@ -109,6 +108,10 @@ public class Enemy extends Entity {
     private void shoot() {
         System.out.println("Enemy shoots from: X=" + getPos()[0] + " Y=" + getPos()[1] + getPos()[1] / 2);
         Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10, "https://i.ibb.co/RpGfBNNN/bullet-Photoroom.png");
+    }
+
+    private void despawn() {
+        
     }
 
     // Optional getters for x and y

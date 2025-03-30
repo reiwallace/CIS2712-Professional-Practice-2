@@ -3,6 +3,9 @@ package pp2.Levels;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.animation.TranslateTransition;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import pp2.Entity.Entity;
 import pp2.Entity.MovementPatterns.MovementPattern;
 
@@ -16,7 +19,7 @@ public abstract class AbstractLevel {
      * @param movementPattern - Enemy movement pattern
      * @param entryPosition - [x, y] coordinates to spawn enemy at
      */
-    public void spawnEnemy(int spawnDelay, int despawnDelay, Entity enemy, MovementPattern movementPattern, int[] entryPosition) {
+    public void spawnEnemy(int spawnDelay, int despawnDelay, Entity enemy, MovementPattern movementPattern, int[] entryPosition, Rectangle gameFrame) {
         Timer spawnTimer = new Timer();
         TimerTask spawnEnemy = new TimerTask() {
             @Override
@@ -30,17 +33,53 @@ public abstract class AbstractLevel {
         TimerTask despawnEnemy = new TimerTask() {
             @Override
             public void run() {
-                
+                movementPattern.stopMovement();
+                despawn(findClosestEdge(enemy, gameFrame), enemy)
             }
         };
         despawnTimer.schedule(despawnEnemy, despawnDelay * 1000);
     }
 
-    private void findClosestEdge(Entity entity) {
-        if(entity == null) return;
+    /** Finds the closest edge to an entity
+     * @param entity - Entity to find closest edge from
+     * @param gameFrame - The game play area
+     * @return - Coordinates of the closest edge
+     */
+    private Double[] findClosestEdge(Entity entity, Rectangle gameFrame) {
+        if(entity == null) return new Double[] {0.0, 0.0};
         Double x = entity.getPos()[0];
         Double y = entity.getPos()[1];
+        Double frameWidth = gameFrame.getWidth();
 
-        
+        if(x > frameWidth/2) { // If on the right side of the frame
+            if(frameWidth - x < y) { // If closer to the right edge than top of the screen
+                return new Double[] {gameFrame.getWidth() + entity.getImage().getFitWidth() + 2, entity.getPos()[1]};
+            } else {
+                return new Double[] {entity.getPos()[0], 0 - entity.getImage().getFitHeight() - 2};
+            }
+        } else { // If on the left side of the frame
+            if(frameWidth + x < y) { // If closer to the left edge than the top of the screen
+                return new Double[] {0 - entity.getImage().getFitWidth() - 2, entity.getPos()[1]};
+            } else {
+                return new Double[] {entity.getPos()[0], 0 - entity.getImage().getFitHeight() - 2};
+            }
+        }
+    }
+
+    /** Moves an entity off screen then despawns it
+     * @param x - X coordinate to move entity to
+     * @param y - Y coordinate to move entity to
+     * @param entity - Entity to move and despawn
+     */
+    private void despawn(Double[] coordinates, Entity entity) {
+        TranslateTransition despawnMovement = new TranslateTransition(Duration.seconds(2), entity.getImage());
+        despawnMovement.setToX(coordinates[0]);
+        despawnMovement.setToY(coordinates[1]);
+        despawnMovement.setCycleCount(1);
+        despawnMovement.setAutoReverse(false);
+        despawnMovement.setOnFinished(e -> {
+            entity.destroy();
+        });
+        despawnMovement.play();
     }
 }

@@ -16,8 +16,10 @@ public abstract class MovementPattern {
         this.moving = moving;
     }
 
-    /** Move entity in a specific pattern
+    /** Move the entity in a specific pattern
      */
     protected abstract void moveEntity();
+    /** Stop entity movement
+     */
     public abstract void stopMovement();
 }

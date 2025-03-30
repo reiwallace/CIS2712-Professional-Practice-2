@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import pp2.Entity.Entity;
 import pp2.Entity.Player;
 import pp2.Entity.Enemies.Enemy;
+import pp2.Entity.MovementPatterns.HorizontalPattern;
 
 public class GameFrame {
     private final Rectangle gameFrame = new Rectangle();
@@ -48,6 +49,8 @@ public class GameFrame {
 
         entities.add(player = new Player(10, 5, mainWindow, gameFrame, 1)); // Initialise player character
         entities.add(enemy = new Enemy(10, 5, mainWindow, gameFrame, 2));
+        HorizontalPattern h = new HorizontalPattern(enemy, mainWindow, 2, true, new Double[] {20.0, 50.0}, new Double[] {400.0, 50.0});
+        
         //HorizontalPattern enemy1 = new HorizontalPattern(enemy, null, 0, null, null, null)
         
     }
