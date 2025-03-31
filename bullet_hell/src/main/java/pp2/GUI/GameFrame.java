@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pp2.Entity.Entity;
 import pp2.Entity.Player;
-import pp2.Entity.Enemies.Enemy;
 import pp2.Levels.Level1;
 
 public class GameFrame {
@@ -20,7 +19,7 @@ public class GameFrame {
     private MainWindow mainWindow;
     private GridPane mainGrid;
 
-    private Image imagePath = new Image("https://i.ibb.co/YBZzsddp/game-BGTEST.jpg"); // Path of background image (URL)
+    private Image imagePath = new Image("file:resources/Backgrounds/gameBGTEST.jpg"); // Path of background image (URL)
     private ImageView backgroundImage  = new ImageView(imagePath); // Background image
 
     private Player player;

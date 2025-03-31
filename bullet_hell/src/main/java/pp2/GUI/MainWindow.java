@@ -3,9 +3,6 @@ package pp2.GUI;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -13,7 +10,6 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class MainWindow {
     private Stage stage = new Stage();
@@ -26,10 +22,6 @@ public class MainWindow {
     private int rows = 30; // Number of rows in the grid pane
     private int columns = 40; // Number of columns in the grid pane
 
-    private final int gameRowSpan = 28;
-    private final int gameColumnSpan = 24;
-    private final int gameInitialRow = 1;
-    private final int gameInitialColumn = 2;
     private ArrayList<Rectangle> backDrop = new ArrayList<Rectangle>();
 
     public double titleBarHeight = 37.5999755859375;
@@ -108,6 +100,7 @@ public class MainWindow {
     public Stage getStage() { return stage; }
     public Scene getScene() { return scene; }
     public GridPane getGrid() { return pane; }
+    public PlayerStatisticsPanel getStatsPanel() { return statsPanel; }
     public double getTitleBarHeight() { return titleBarHeight; }
     public GameFrame getGameFrame() { return gameFrame; }
 

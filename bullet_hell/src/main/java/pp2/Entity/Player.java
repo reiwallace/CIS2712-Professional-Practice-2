@@ -1,7 +1,6 @@
 package pp2.Entity;
 
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;

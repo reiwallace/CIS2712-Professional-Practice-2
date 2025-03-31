@@ -1,8 +1,6 @@
 package pp2.Entity.MovementPatterns;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 import pp2.Entity.Entity;
