@@ -1,5 +1,8 @@
 package pp2.Entity.AttackPatterns;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import pp2.Entity.Entity;
 import pp2.Entity.Enemies.Enemy;
 import pp2.GUI.MainWindow;
@@ -8,13 +11,16 @@ public abstract class AbstractAttackPattern {
     protected MainWindow mainWindow; // Main game window
     protected Entity entity; // Attacking enemy
     protected int fireRate; // Rate of fire
-    protected int speed; // Speed of bullets
+    protected Double speed; // Speed of bullets
+    protected Timeline shootTimer; // Timer to repeat shots
 
-    /** Allows an enemy to shoot in a chosen pattern
-     * @param mainWindow - Main window to get player and grid from
-     * @param entity - Entity to shoot from
+    /** Abstract method for firing bullets
+     * @param mainWindow - Main window to attach bullets to
+     * @param entity - Entity to fire bullets from
+     * @param fireRate - Rate of fire for bullets in seconds
+     * @param speed - speed of bullet
      */
-    public AbstractAttackPattern(MainWindow mainWindow, Entity entity, int fireRate, int speed) {
+    public AbstractAttackPattern(MainWindow mainWindow, Entity entity, int fireRate, Double speed) {
         this.mainWindow = mainWindow;
         this.entity = entity;
         this.fireRate = fireRate;
@@ -25,11 +31,18 @@ public abstract class AbstractAttackPattern {
 
     /** Start entity firing
      */
-    public abstract void startFiring();
+    public void startFiring() {
+        if(fireRate < 1) fireRate = 2;
+        shootTimer = new Timeline(new KeyFrame(Duration.seconds(fireRate), e -> fire()));
+        shootTimer.setCycleCount(Timeline.INDEFINITE);
+        shootTimer.play();
+    }
 
     /** Stop entity firing
      */
-    public abstract void stopFiring();
+    public void stopFiring() {
+        shootTimer.stop();
+    }
 
     /** Bullet firing function
      */

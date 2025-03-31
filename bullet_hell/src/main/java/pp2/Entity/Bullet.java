@@ -6,12 +6,13 @@ import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;
 
 public class Bullet extends Entity {
-    private final double speed; // Speed of the bullet
     private static String enemyImagePath = "file:resources/Entities/enemy-bullet.png"; // Path of enemy bullet
     private boolean isActive = true;
+    private boolean accelerating = false;
     private boolean isEnemyBullet; // To identify the enemy or player bullet
     private int damage; // Depend on either enemy or player bullets, the damage is different.
     private AnimationTimer checkLoop;
+    private Double[] loopDirection = new Double[2]; // motion
 
     /** Initialise a bullet
      * @param mainWindow - Main window to attach bullet to
@@ -19,21 +20,19 @@ public class Bullet extends Entity {
      * @param y_pos - Initial Y position of bullet
      * @param isEnemyBullet - Whether the bullet is fired from enemy or player
      * @param damage - Damage of the bullet
-     * @param speed - Speed of bullet (1.5x for enemies)
      */
-    public Bullet(MainWindow mainWindow, double initialX, double initialY, boolean isEnemyBullet, int damage, int speed) {
-        super(enemyImagePath, 1, 3, mainWindow, mainWindow.getGameFrame().getGameFrame(), new int[] {30, 30});
+    public Bullet(MainWindow mainWindow, double initialX, double initialY, boolean isEnemyBullet, boolean accelerating, int damage) {
+        super(enemyImagePath, 1, 3, mainWindow, mainWindow.getGameFrame().getGameFrame(), new int[] {40, 40});
+        this.accelerating = accelerating;
         this.isEnemyBullet = isEnemyBullet;
         this.damage = damage;
-        this.speed = isEnemyBullet ? speed : -speed*1.5; // Enemy bullets move down, player bullets move up
         
         // Set the bullet to an imageView
         setPosition(initialX, initialY);
         addEntity(1, 3);
 
         setIsTargetable(false);
-        // Move bullet
-        moveBullet(new Double[] {1.1, 1.1});
+
         checkLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -43,28 +42,11 @@ public class Bullet extends Entity {
         checkLoop.start();
     }
 
-    // Moves the bullet upwards
-    /* UNUSED METHOD?
-    private void moveBullet(GridPane gameFrame) {
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                y_pos -= speed; // Move up
-                bulletView.setY(y_pos);
-
-                // Remove bullet when off-screen
-                if (y_pos < -10) {
-                    gameFrame.getChildren().remove(bulletView);
-                    stop();
-                }
-            }
-        };
-        timer.start();
-    } */
-
     /** Animation timer method to move the bullet in the appropriate ditection
      */
     public void moveBullet(Double[] direction) {
+        this.loopDirection[0] = direction[0];
+        this.loopDirection[1] = direction[1];
         AnimationTimer timer = new AnimationTimer() { // Move bullet in an animation timer
             @Override
             public void handle(long now) {
@@ -73,11 +55,17 @@ public class Bullet extends Entity {
                     return;
                 }
 
+                // Accelerate bullet
+                if(accelerating) {
+                    loopDirection[0] = loopDirection[0] * 1.01;
+                    loopDirection[1] = loopDirection[1] * 1.01;
+                }
+
                 // Move bullet and hitbox
-                setPosition(getPos()[0], getPos()[1] + speed);
+                setPosition(getPos()[0] + loopDirection[0], getPos()[1] + loopDirection[1]);
 
                 // Remove bullet if off-screen
-                if (getPos()[1] < -10 || getPos()[1] > gameFrame.getHeight()) {
+                if (getPos()[1] < -10 || getPos()[1] > gameFrame.getHeight() || getPos()[0] < -10 || getPos()[0] > gameFrame.getWidth()) {
                     destroy();
                     stop();
                 }
@@ -126,6 +114,7 @@ public class Bullet extends Entity {
     public void destroy() {
         isActive = false;
         checkLoop.stop();
+        mainWindow.getGameFrame().getEntities().remove(this);
         mainWindow.getGrid().getChildren().removeAll(entityImage, entityHitbox);
     }
 
@@ -137,6 +126,7 @@ public class Bullet extends Entity {
     public boolean isActive() { return isActive; }
     public boolean isEnemyBullet() { return isEnemyBullet; }
 
+    public void setLoopDirection(Double x, Double y) { this.loopDirection[0] = x; this.loopDirection[1] = y; }
     public void setActive(boolean active) { isActive = active; }
     public void setEnemyBullet(boolean enemyBullet) { this.isEnemyBullet = enemyBullet; }
     public void setDamage(int damage) { this.damage = damage; }
