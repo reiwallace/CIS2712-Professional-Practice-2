@@ -14,21 +14,18 @@ public class Bullet extends Entity {
     private AnimationTimer checkLoop;
 
     /** Initialise a bullet
-     * @param gameFrame - Area the game is played in 
-     * @param gameGrid - Window grid to attach bullet to
+     * @param mainWindow - Main window to attach bullet to
      * @param x_pos - Initial X position of bullet
      * @param y_pos - Initial Y position of bullet
      * @param isEnemyBullet - Whether the bullet is fired from enemy or player
      * @param damage - Damage of the bullet
-     * @param imagePath - Image URL to use for bullet
+     * @param speed - Speed of bullet (1.5x for enemies)
      */
-    public Bullet(Rectangle gameFrame, MainWindow mainWindow, double initialX, double initialY, boolean isEnemyBullet, int damage) {
-        super(enemyImagePath, 1, 3, mainWindow, gameFrame, new int[] {30, 30});
-        this.gameFrame = gameFrame;
-        this.mainWindow = mainWindow;
+    public Bullet(MainWindow mainWindow, double initialX, double initialY, boolean isEnemyBullet, int damage, int speed) {
+        super(enemyImagePath, 1, 3, mainWindow, mainWindow.getGameFrame().getGameFrame(), new int[] {30, 30});
         this.isEnemyBullet = isEnemyBullet;
         this.damage = damage;
-        this.speed = isEnemyBullet ? 2.0 : -3.0; // Enemy bullets move down, player bullets move up
+        this.speed = isEnemyBullet ? speed : -speed*1.5; // Enemy bullets move down, player bullets move up
         
         // Set the bullet to an imageView
         setPosition(initialX, initialY);

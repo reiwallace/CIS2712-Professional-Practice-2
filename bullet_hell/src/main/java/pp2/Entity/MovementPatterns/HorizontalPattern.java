@@ -45,7 +45,7 @@ public class HorizontalPattern extends MovementPattern{
         initialMovement.setAutoReverse(false);
         initialMovement.setOnFinished( e -> {
             moveEntity();
-            if(entity instanceof Enemy) ((Enemy)entity).startShooting();
+            if(entity instanceof Enemy) ((Enemy)entity).getAttackPattern().startFiring();
         });
         initialMovement.play();
     }

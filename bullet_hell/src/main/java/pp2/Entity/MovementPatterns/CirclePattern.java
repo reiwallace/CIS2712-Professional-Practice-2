@@ -35,9 +35,11 @@ public class CirclePattern extends MovementPattern {
         radius = (int) (mainWindow.getGameFrame().getGameFrame().getWidth() / 4);
     }
 
+    /* Move entity to starting position and start main movement loop
+     */
     @Override
     public void startMovement() {
-        positionTracker = new AnimationTimer() {
+        positionTracker = new AnimationTimer() { // Update entity hitbox with transition
         @Override
         public void handle(long now) {
             entity.setPosition(entity.getPos()[0], entity.getPos()[1]);
@@ -51,11 +53,12 @@ public class CirclePattern extends MovementPattern {
         initialMovement.setAutoReverse(false);
         initialMovement.setOnFinished( e -> {
             moveEntity();
-            if(entity instanceof Enemy) ((Enemy)entity).startShooting();
+            if(entity instanceof Enemy) ((Enemy)entity).getAttackPattern().startFiring();
         });
         initialMovement.play();
     }
 
+    // Main movememnt loop
     @Override
     protected void moveEntity() {
         if (!moving) return;
