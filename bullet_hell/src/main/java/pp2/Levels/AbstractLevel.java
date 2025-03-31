@@ -20,7 +20,6 @@ public abstract class AbstractLevel {
         this.entryPositionTopRight = new Double[] {gameFrame.getWidth() * 0.75, -50.0};
         this.entryPositionLeft = new Double[] {-50.0, gameFrame.getHeight() * 0.3};
         this.entryPositionRight = new Double[] {gameFrame.getWidth() + 50, gameFrame.getHeight() * 0.3};
-
     }
 
     /** Spawns an enemy at a set time with a set despawn time.
