@@ -2,6 +2,7 @@ package pp2.Levels;
 
 import javafx.scene.shape.Rectangle;
 import pp2.Entity.Enemies.Enemy;
+import pp2.Entity.MovementPatterns.CirclePattern;
 import pp2.Entity.MovementPatterns.HorizontalPattern;
 import pp2.GUI.MainWindow;
 
@@ -15,7 +16,8 @@ public class Level1 extends AbstractLevel{
             Enemy enemy1 = new Enemy(10, 10, mainWindow, gameFrame);
             mainWindow.getGameFrame().getEntities().add(enemy1);
             HorizontalPattern pattern1 = new HorizontalPattern(mainWindow, 1, new Double[] {gameFrame.getWidth() * 0.2  - enemy1.getImage().getFitWidth()/2, gameFrame.getHeight() * 0.25 - i}, new Double[] {gameFrame.getWidth() * 0.8 - enemy1.getImage().getFitWidth()/2, gameFrame.getHeight() * 0.25 - i});
-            spawnEnemy(i, 10, enemy1, pattern1, entryPositionTopLeft, gameFrame);
+            CirclePattern circlePattern1 = new CirclePattern(enemy1, mainWindow, 1, true);
+            spawnEnemy(i, 10, enemy1, circlePattern1, entryPositionTopLeft, gameFrame);
         }
 
         mainWindow.getGameFrame().getPlayer().setIsTargetable(true);
