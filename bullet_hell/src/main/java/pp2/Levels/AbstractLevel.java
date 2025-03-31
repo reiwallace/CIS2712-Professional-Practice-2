@@ -48,7 +48,9 @@ public abstract class AbstractLevel {
                 enemy.setPosition(entryPosition[0], entryPosition[1]);
                 movementPattern.setEntity(enemy);
                 enemy.getImage().setVisible(true);
+                enemy.setIsTargetable(true);
                 movementPattern.startMovement();
+                // Start despawn timer
                 despawnTimer.schedule(despawnEnemy, despawnDelay * 1000);
             }
         };

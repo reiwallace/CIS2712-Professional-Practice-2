@@ -24,7 +24,6 @@ public class GameFrame {
     private ImageView backgroundImage  = new ImageView(imagePath); // Background image
 
     private Player player;
-    private Enemy enemy;
     protected ArrayList<Entity> entities = new ArrayList<Entity>();
 
     /** Set up default game frame with its size
@@ -46,8 +45,7 @@ public class GameFrame {
         mainGrid.add(gameFrame, 2, 1, 24, 28); // Add the game window to the game frame 2 columns in and 1 row down
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
 
-        entities.add(player = new Player(10, 5, mainWindow, gameFrame, 1)); // Initialise player character
-        //HorizontalPattern enemy1 = new HorizontalPattern(enemy, null, 0, null, null, null)
+        entities.add(player = new Player(10, 5, mainWindow, gameFrame)); // Initialise player character
     }
 
     public void startLevel() {

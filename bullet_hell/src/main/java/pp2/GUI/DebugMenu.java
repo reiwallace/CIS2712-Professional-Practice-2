@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 
 public class DebugMenu {
     private Button toggleHitboxes = new Button("Toggle Hitboxes");
+    private Button godMode = new Button("Toggle God Mode");
     private int rowSlot = 20;
 
     /** Initialise debug menu with its options
@@ -16,6 +17,7 @@ public class DebugMenu {
      */
     public DebugMenu(MainWindow mainWindow) {
         configureToggleHitboxes(mainWindow);
+        mainWindow.getGrid().add(godMode, 29, rowSlot, 9, 1);
     }
 
     /** Set up a button to toggle all entity hitboxes
@@ -39,7 +41,7 @@ public class DebugMenu {
                 } else {
                     for(int i = 0; i < entities.size(); i++) {
                         var entity = entities.get(i); // VAR MENTIONED :speaking_head:
-                        if(entities.get(i) != null) {
+                        if(entities.get(i) != null && entities.get(i).isTargetable()) {
                             entity.toggleHitboxVisability(true);
                         }
                     }

@@ -29,7 +29,7 @@ public abstract class Entity {
         this.health = health;
         this.entityId = id;
         this.gameFrame = gameFrame;
-        this.isTargetable = true; // Default: can be hit
+        this.isTargetable = false; // Default: cannot be hit
         this.mainWindow = mainWindow;
 
         setFitSize(50, 50);

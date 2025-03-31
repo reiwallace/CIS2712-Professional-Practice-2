@@ -40,7 +40,9 @@ public class HorizontalPattern extends MovementPattern{
             }
         };
         positionTracker.start();
+        // Get closest movement point
         Double[] coordinates = findClosestCoordinate();
+        // Move to initial point
         TranslateTransition initialMovement = new TranslateTransition(Duration.seconds(speed/2), entity.getImage());
         initialMovement.setToX(coordinates[0]);
         initialMovement.setToY(coordinates[1]);
@@ -67,17 +69,20 @@ public class HorizontalPattern extends MovementPattern{
 
     @Override
     public void moveEntity() {
+        // Left side movement 
         movementLeft = new TranslateTransition(Duration.seconds(speed), entity.getImage());
         movementLeft.setToX(coordinates1[0]);
         movementLeft.setToY(coordinates1[1]);
         movementLeft.setCycleCount(1);
         movementLeft.setAutoReverse(false);
+        // Right side movement
         movementRight = new TranslateTransition(Duration.seconds(speed), entity.getImage());
         movementRight.setToX(coordinates2[0]);
         movementRight.setToY(coordinates2[1]);
         movementRight.setCycleCount(1);
         movementRight.setAutoReverse(false);
 
+        // Loop onto other movement upon finishing
         movementLeft.setOnFinished(e -> {
             movementRight.play();
         });
@@ -92,6 +97,5 @@ public class HorizontalPattern extends MovementPattern{
     public void stopMovement() {
         movementLeft.stop();
         movementRight.stop();
-        positionTracker.stop();
     }
 }

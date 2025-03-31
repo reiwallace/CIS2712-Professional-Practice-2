@@ -4,7 +4,7 @@ import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;
 
 public class Player extends Entity {
-    private static String playerImageURL = "https://i.ibb.co/LhYpPskV/player.png";
+    private static String playerImageURL = "https://i.ibb.co/TD8pxWmR/ship-stopped.png";
 
     private int speed; // Player movement speed
 
@@ -17,7 +17,7 @@ public class Player extends Entity {
      * @param gameFrame - Game area to restrict movement to
      * @param id - id of entity
      */
-    public Player(int health, int speed, MainWindow mainWindow, Rectangle gameFrame, int id) {
+    public Player(int health, int speed, MainWindow mainWindow, Rectangle gameFrame) {
         super(playerImageURL, health, 1, mainWindow, gameFrame); // Call Entity constructor
         this.speed = speed;
         this.gameFrame = gameFrame; // Assign game area

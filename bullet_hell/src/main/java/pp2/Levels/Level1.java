@@ -12,12 +12,13 @@ public class Level1 extends AbstractLevel{
 
         // Enemy spawns
         for(int i = 5; i < 20; i++) {
-            Enemy enemy1 = new Enemy(10, 10, mainWindow, gameFrame, 0);
+            Enemy enemy1 = new Enemy(10, 10, mainWindow, gameFrame);
             mainWindow.getGameFrame().getEntities().add(enemy1);
             HorizontalPattern pattern1 = new HorizontalPattern(mainWindow, 1, new Double[] {gameFrame.getWidth() * 0.2  - enemy1.getImage().getFitWidth()/2, gameFrame.getHeight() * 0.25 - i}, new Double[] {gameFrame.getWidth() * 0.8 - enemy1.getImage().getFitWidth()/2, gameFrame.getHeight() * 0.25 - i});
             spawnEnemy(i, 10, enemy1, pattern1, entryPositionTopLeft, gameFrame);
         }
 
+        mainWindow.getGameFrame().getPlayer().setIsTargetable(true);
         mainWindow.getGameFrame().getPlayer().setPosition(gameFrame.getWidth()/2 - mainWindow.getGameFrame().getPlayer().getImage().getFitWidth() /2, gameFrame.getHeight() * 0.8);
     }
 }

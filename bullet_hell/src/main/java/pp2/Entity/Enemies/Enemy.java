@@ -24,7 +24,7 @@ public class Enemy extends Entity {
      * @param gameFrame - Game area to restrict movement to
      * @param id - Id of entity
      */
-    public Enemy(int health, int damage, MainWindow mainWindow, Rectangle gameFrame, int id) {
+    public Enemy(int health, int damage, MainWindow mainWindow, Rectangle gameFrame) {
         super(enemyImageURL, health, 2, mainWindow, gameFrame); // Entity handles image loading
         this.gameFrame = gameFrame;
         this.damage = damage;
