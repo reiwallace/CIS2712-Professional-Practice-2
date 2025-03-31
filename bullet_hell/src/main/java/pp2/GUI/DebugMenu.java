@@ -2,8 +2,8 @@ package pp2.GUI;
 
 import javafx.event.EventHandler; 
 import pp2.Entity.Entity;
+import pp2.Entity.Player;
 import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button; 
 
@@ -17,7 +17,7 @@ public class DebugMenu {
      */
     public DebugMenu(MainWindow mainWindow) {
         configureToggleHitboxes(mainWindow);
-        mainWindow.getGrid().add(godMode, 29, rowSlot, 9, 1);
+        configureGodMode(mainWindow);
     }
 
     /** Set up a button to toggle all entity hitboxes
@@ -53,6 +53,23 @@ public class DebugMenu {
         toggleHitboxes.setFocusTraversable(false);
         toggleHitboxes.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE); // Make button fill grid
         mainWindow.getGrid().add(toggleHitboxes, 29, rowSlot, 9, 1);
+        rowSlot++;
+    }
+
+    private void configureGodMode(MainWindow mainWindow) {
+        godMode.setVisible(true);
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Player player = mainWindow.getGameFrame().getPlayer();
+                if(player != null) return;
+                player.setIsTargetable(false);
+            }
+        };
+        godMode.setOnAction(event);
+        godMode.setFocusTraversable(false);
+        godMode.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE); // Make button fill grid
+        mainWindow.getGrid().add(godMode, 29, rowSlot, 9, 1);
         rowSlot++;
     }
 }

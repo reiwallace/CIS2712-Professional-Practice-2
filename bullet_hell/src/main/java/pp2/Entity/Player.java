@@ -1,5 +1,6 @@
 package pp2.Entity;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;
 
@@ -18,7 +19,7 @@ public class Player extends Entity {
      * @param id - id of entity
      */
     public Player(int health, int speed, MainWindow mainWindow, Rectangle gameFrame) {
-        super(playerImageURL, health, 1, mainWindow, gameFrame); // Call Entity constructor
+        super(playerImageURL, health, 1, mainWindow, gameFrame, new int[] {50, 50}); // Call Entity constructor
         this.speed = speed;
         this.gameFrame = gameFrame; // Assign game area
 
@@ -27,6 +28,29 @@ public class Player extends Entity {
         addEntity(1, 3);
     }
 
+    // Edited set hitbox for smaller player hitbox
+    @Override
+    public void setHitbox() {
+        if (entityImage != null) {
+            entityHitbox = new Rectangle(
+                    entityImage.getFitWidth() / 2,
+                    entityImage.getFitHeight() / 2
+            );
+            entityHitbox.setFill(Color.BLACK);
+            entityHitbox.setVisible(false);
+        }
+    }
+
+    // Edited set position for smaller player hitbox
+    @Override
+    public void setPosition(double x, double y) {
+        // Update character image position
+        entityImage.setTranslateX(x);
+        entityImage.setTranslateY(y);
+        // Update hitbox position
+        entityHitbox.setTranslateX(entityImage.getTranslateX() + entityImage.getFitWidth() * 0.25);
+        entityHitbox.setTranslateY(entityImage.getTranslateY());
+    }
 
     /** Reduces the player's health when hit.
      * @param damage - Damage to reduce player's health by
@@ -45,8 +69,8 @@ public class Player extends Entity {
      */
     @Override
     public void destroy() {
-        System.out.println("Player destroyed!");
-        mainWindow.getGrid().getChildren().removeAll(entityImage, getHitbox());
+        mainWindow.getGrid().getChildren().removeAll(entityImage, entityHitbox);
+        setIsTargetable(false);
     }
 
     public int getSpeed() { return speed; }

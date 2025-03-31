@@ -3,6 +3,7 @@ package pp2.Entity.MovementPatterns;
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
+import pp2.Entity.Enemies.Enemy;
 import pp2.GUI.MainWindow;
 
 public class HorizontalPattern extends MovementPattern{
@@ -26,12 +27,6 @@ public class HorizontalPattern extends MovementPattern{
     }
 
     public void startMovement() {
-        moveToStart();
-    }
-
-    /** Moves entity to the start of the pattern
-     */
-    public void moveToStart() {
         // Update position and hitbox continuously
         positionTracker = new AnimationTimer() {
         @Override
@@ -50,6 +45,7 @@ public class HorizontalPattern extends MovementPattern{
         initialMovement.setAutoReverse(false);
         initialMovement.setOnFinished( e -> {
             moveEntity();
+            if(entity instanceof Enemy) ((Enemy)entity).startShooting();
         });
         initialMovement.play();
     }
@@ -89,7 +85,6 @@ public class HorizontalPattern extends MovementPattern{
         movementRight.setOnFinished(e -> {
             movementLeft.play();
         });
-
         movementLeft.play();
     }
 

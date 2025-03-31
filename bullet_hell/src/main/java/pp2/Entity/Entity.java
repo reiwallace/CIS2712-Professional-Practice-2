@@ -24,7 +24,7 @@ public abstract class Entity {
      * @param mainWindow - Main window to get grid from
      * @param gameFrame - Game frame to check bounds of
      */
-    public Entity(String imagePath, int health, int id, MainWindow mainWindow, Rectangle gameFrame) {
+    public Entity(String imagePath, int health, int id, MainWindow mainWindow, Rectangle gameFrame, int[] fitSize) {
         this.entityImage = new ImageView(new Image(imagePath));
         this.health = health;
         this.entityId = id;
@@ -32,7 +32,7 @@ public abstract class Entity {
         this.isTargetable = false; // Default: cannot be hit
         this.mainWindow = mainWindow;
 
-        setFitSize(50, 50);
+        setFitSize(fitSize[0], fitSize[1]);
         entityImage.setFocusTraversable(true);
         entityImage.setPickOnBounds(true);
         entityImage.setPreserveRatio(true);

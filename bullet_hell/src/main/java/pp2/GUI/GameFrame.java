@@ -45,7 +45,7 @@ public class GameFrame {
         mainGrid.add(gameFrame, 2, 1, 24, 28); // Add the game window to the game frame 2 columns in and 1 row down
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
 
-        entities.add(player = new Player(10, 5, mainWindow, gameFrame)); // Initialise player character
+        entities.add(player = new Player(10, 10, mainWindow, gameFrame)); // Initialise player character
     }
 
     public void startLevel() {

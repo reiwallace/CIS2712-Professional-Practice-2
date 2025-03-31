@@ -1,8 +1,11 @@
 package pp2.GUI;
 
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -10,6 +13,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MainWindow {
     private Stage stage = new Stage();

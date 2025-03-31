@@ -15,6 +15,7 @@ public class Enemy extends Entity {
     private static String enemyImageURL = "https://i.ibb.co/M5PPgw2r/enemy-ship.png";
     private int damage;
     private Timeline shootTimer;
+    private int fireRate;
 
     /**
      * Constructor for Enemy
@@ -24,10 +25,11 @@ public class Enemy extends Entity {
      * @param gameFrame - Game area to restrict movement to
      * @param id - Id of entity
      */
-    public Enemy(int health, int damage, MainWindow mainWindow, Rectangle gameFrame) {
-        super(enemyImageURL, health, 2, mainWindow, gameFrame); // Entity handles image loading
+    public Enemy(int health, int damage, MainWindow mainWindow, Rectangle gameFrame, int fireRate) {
+        super(enemyImageURL, health, 2, mainWindow, gameFrame, new int[] {50, 50}); // Entity handles image loading
         this.gameFrame = gameFrame;
         this.damage = damage;
+        this.fireRate = fireRate;
 
         // Set random spawn position
         Random random = new Random();
@@ -61,9 +63,9 @@ public class Enemy extends Entity {
 
     /** Begins a loop where the entity fires bullet every 2 seconds
      */
-    public void startShooting(int interval) {
-        if(interval < 1) interval = 2;
-        shootTimer = new Timeline(new KeyFrame(Duration.seconds(interval), e -> shoot()));
+    public void startShooting() {
+        if(fireRate < 1) fireRate = 2;
+        shootTimer = new Timeline(new KeyFrame(Duration.seconds(fireRate), e -> shoot()));
         shootTimer.setCycleCount(Timeline.INDEFINITE);
         shootTimer.play();
     }
@@ -79,12 +81,8 @@ public class Enemy extends Entity {
     /** Shoots a bullet below the enemy
      */
     private void shoot() {
-        Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10, "https://i.ibb.co/RpGfBNNN/bullet-Photoroom.png");
+        Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10);
         mainWindow.getGameFrame().getEntities().add(enemyBullet);
-    }
-
-    private void despawn() {
-        
     }
 
     // Optional getters for x and y
