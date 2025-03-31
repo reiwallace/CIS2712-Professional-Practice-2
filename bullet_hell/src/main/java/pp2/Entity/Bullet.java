@@ -7,7 +7,7 @@ import pp2.GUI.MainWindow;
 
 public class Bullet extends Entity {
     private final double speed; // Speed of the bullet
-    private static String enemyImagePath = "https://i.ibb.co/RpGfBNNN/bullet-Photoroom.png"; // Path of enemy bullet
+    private static String enemyImagePath = "file:resources/Entities/enemy-bullet.png"; // Path of enemy bullet
     private boolean isActive = true;
     private boolean isEnemyBullet; // To identify the enemy or player bullet
     private int damage; // Depend on either enemy or player bullets, the damage is different.

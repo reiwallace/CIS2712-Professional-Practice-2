@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Enemy extends Entity {
     private AbstractAttackPattern attackPattern; // Attack pattern used by enemy
-    private static String enemyImageURL = "https://i.ibb.co/M5PPgw2r/enemy-ship.png";
+    private static String enemyImageURL = "file:resources/Entities/enemy-ship.png";
     private int damage;
 
     /**

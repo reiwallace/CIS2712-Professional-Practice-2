@@ -1,12 +1,13 @@
 package pp2.Entity;
 
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;
 
 public class Player extends Entity {
-    private static String playerImageURL = "https://i.ibb.co/TD8pxWmR/ship-stopped.png";
+    private static String playerImageURL = "file:resources/Entities/ship-stopped.png";
     private ProgressBar healthBar = new ProgressBar(1);
     private int speed; // Player movement speed
 
