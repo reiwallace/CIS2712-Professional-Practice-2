@@ -7,6 +7,7 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import pp2.Entity.Entity;
+import pp2.Entity.Enemies.Enemy;
 import pp2.Entity.MovementPatterns.MovementPattern;
 
 public abstract class AbstractLevel {
@@ -36,6 +37,7 @@ public abstract class AbstractLevel {
             @Override
             public void run() {
                 movementPattern.stopMovement();
+                if(enemy instanceof Enemy) ((Enemy)enemy).getAttackPattern().stopFiring();
                 despawn(findClosestEdge(enemy, gameFrame), enemy);
             }
         };
