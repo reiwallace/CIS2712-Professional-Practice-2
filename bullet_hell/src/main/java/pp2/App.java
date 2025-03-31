@@ -13,7 +13,6 @@ public class App extends Application {
         Stage gameStage = gameWindow.getStage();
         gameStage.show();
         gameWindow.windowedMode(); // Set default screen mode
-        gameWindow.startGame();
     }
 
 
