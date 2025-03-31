@@ -10,7 +10,18 @@ import pp2.Entity.Entity;
 import pp2.Entity.MovementPatterns.MovementPattern;
 
 public abstract class AbstractLevel {
-    public AbstractLevel() {}
+    protected Double[] entryPositionTopLeft; // Template entry points
+    protected Double[] entryPositionTopRight;
+    protected Double[] entryPositionLeft;
+    protected Double[] entryPositionRight;
+
+    public AbstractLevel(Rectangle gameFrame) {
+        this.entryPositionTopLeft = new Double[] {gameFrame.getWidth() * 0.25, -50.0};
+        this.entryPositionTopRight = new Double[] {gameFrame.getWidth() * 0.75, -50.0};
+        this.entryPositionLeft = new Double[] {-50.0, gameFrame.getHeight() * 0.3};
+        this.entryPositionRight = new Double[] {gameFrame.getWidth() + 50, gameFrame.getHeight() * 0.3};
+
+    }
 
     /** Spawns an enemy at a set time with a set despawn time.
      * @param spawnDelay - Time after starting the level to spawn an enemy in seconds
@@ -19,25 +30,29 @@ public abstract class AbstractLevel {
      * @param movementPattern - Enemy movement pattern
      * @param entryPosition - [x, y] coordinates to spawn enemy at
      */
-    public void spawnEnemy(int spawnDelay, int despawnDelay, Entity enemy, MovementPattern movementPattern, int[] entryPosition, Rectangle gameFrame) {
-        Timer spawnTimer = new Timer();
-        TimerTask spawnEnemy = new TimerTask() {
-            @Override
-            public void run() {
-                
-            }
-        };
-        spawnTimer.schedule(spawnEnemy, spawnDelay * 1000);
-
+    public void spawnEnemy(int spawnDelay, int despawnDelay, Entity enemy, MovementPattern movementPattern, Double[] entryPosition, Rectangle gameFrame) {
+        // Define despawn task
         Timer despawnTimer = new Timer();
         TimerTask despawnEnemy = new TimerTask() {
             @Override
             public void run() {
                 movementPattern.stopMovement();
-                despawn(findClosestEdge(enemy, gameFrame), enemy)
+                despawn(findClosestEdge(enemy, gameFrame), enemy);
             }
         };
-        despawnTimer.schedule(despawnEnemy, despawnDelay * 1000);
+        // Define spawn task
+        Timer spawnTimer = new Timer();
+        TimerTask spawnEnemy = new TimerTask() {
+            @Override
+            public void run() {
+                enemy.setPosition(entryPosition[0], entryPosition[1]);
+                movementPattern.setEntity(enemy);
+                enemy.getImage().setVisible(true);
+                movementPattern.startMovement();
+                despawnTimer.schedule(despawnEnemy, despawnDelay * 1000);
+            }
+        };
+        spawnTimer.schedule(spawnEnemy, spawnDelay * 1000);
     }
 
     /** Finds the closest edge to an entity

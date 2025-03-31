@@ -9,16 +9,20 @@ public abstract class MovementPattern {
     protected int speed = 1;
     protected boolean moving = false;
     
-    public MovementPattern(Entity entity, MainWindow mainWindow, int speed, boolean moving) {
-        this.entity = entity;
+    public MovementPattern(MainWindow mainWindow, int speed) {
         this.mainWindow = mainWindow;
         this.speed = speed;
-        this.moving = moving;
     }
+
+    // Setters/getters
+    public void setEntity(Entity e) { this.entity = e; }
 
     /** Move the entity in a specific pattern
      */
     protected abstract void moveEntity();
+    /** Start entity movement
+     */
+    public abstract void startMovement();
     /** Stop entity movement
      */
     public abstract void stopMovement();

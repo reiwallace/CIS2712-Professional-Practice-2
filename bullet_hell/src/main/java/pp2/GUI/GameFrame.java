@@ -2,7 +2,6 @@ package pp2.GUI;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -11,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 import pp2.Entity.Entity;
 import pp2.Entity.Player;
 import pp2.Entity.Enemies.Enemy;
-import pp2.Entity.MovementPatterns.HorizontalPattern;
+import pp2.Levels.Level1;
 
 public class GameFrame {
     private final Rectangle gameFrame = new Rectangle();
@@ -48,11 +47,11 @@ public class GameFrame {
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
 
         entities.add(player = new Player(10, 5, mainWindow, gameFrame, 1)); // Initialise player character
-        entities.add(enemy = new Enemy(10, 5, mainWindow, gameFrame, 2));
-        HorizontalPattern h = new HorizontalPattern(enemy, mainWindow, 2, true, new Double[] {20.0, 50.0}, new Double[] {400.0, 50.0});
-        
         //HorizontalPattern enemy1 = new HorizontalPattern(enemy, null, 0, null, null, null)
-        
+    }
+
+    public void startLevel() {
+        Level1 level = new Level1(mainWindow);
     }
 
     // Setters and getters

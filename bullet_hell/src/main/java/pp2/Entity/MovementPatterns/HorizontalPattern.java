@@ -1,10 +1,8 @@
 package pp2.Entity.MovementPatterns;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
-import pp2.Entity.Entity;
 import pp2.GUI.MainWindow;
 
 public class HorizontalPattern extends MovementPattern{
@@ -14,33 +12,34 @@ public class HorizontalPattern extends MovementPattern{
     private TranslateTransition movementRight;
     private AnimationTimer positionTracker;
 
-    /**
-     * 
-     * @param entity
-     * @param mainWindow
-     * @param speed
-     * @param moving
-     * @param coordinates1
-     * @param coordinates2
+    /** Move entity in a horizontal pattern back and fourth
+     * @param entity - Entity to move
+     * @param mainWindow - Window to move entity in
+     * @param speed - Speed of movement in seconds
+     * @param coordinates1 - Coordinates of left-most point
+     * @param coordinates2 - Coordinates of right-most point
      */
-    public HorizontalPattern(Entity entity, MainWindow mainWindow, int speed, Boolean moving, Double[] coordinates1, Double[] coordinates2) {
-        super(entity, mainWindow, speed, moving);
+    public HorizontalPattern(MainWindow mainWindow, int speed, Double[] coordinates1, Double[] coordinates2) {
+        super(mainWindow, speed);
         this.coordinates1 = coordinates1;
         this.coordinates2 = coordinates2;
-        // Update position and hitbox continuously
-        positionTracker = new AnimationTimer() {
-           @Override
-        public void handle(long now) {
-            entity.setPosition(entity.getPos()[0], entity.getPos()[1]);
-            }
-        };
-        positionTracker.start();
+    }
+
+    public void startMovement() {
         moveToStart();
     }
 
     /** Moves entity to the start of the pattern
      */
     public void moveToStart() {
+        // Update position and hitbox continuously
+        positionTracker = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            entity.setPosition(entity.getPos()[0], entity.getPos()[1]);
+            }
+        };
+        positionTracker.start();
         Double[] coordinates = findClosestCoordinate();
         TranslateTransition initialMovement = new TranslateTransition(Duration.seconds(speed/2), entity.getImage());
         initialMovement.setToX(coordinates[0]);
