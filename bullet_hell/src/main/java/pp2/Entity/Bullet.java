@@ -94,7 +94,7 @@ public class Bullet extends Entity {
             Player player = mainWindow.getGameFrame().getPlayer();
             if(entityHitbox.getBoundsInParent().intersects(player.getHitbox().getBoundsInParent()) && player.isTargetable) {
                 destroy();
-                player.destroy();
+                player.takeDamage(damage);
             }
         }
     }

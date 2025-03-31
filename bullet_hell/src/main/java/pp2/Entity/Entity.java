@@ -9,6 +9,7 @@ import pp2.GUI.MainWindow;
 public abstract class Entity {
     protected ImageView entityImage; // Image to display on entity
     protected int health; // Starting health of entity
+    protected int maxHealth; // Max health of entity
     protected Rectangle entityHitbox; // Hitbox of entity
     protected boolean isTargetable; // Whether entity can be hit or not
     protected MainWindow mainWindow; // Main window to attach entity to
@@ -27,6 +28,7 @@ public abstract class Entity {
     public Entity(String imagePath, int health, int id, MainWindow mainWindow, Rectangle gameFrame, int[] fitSize) {
         this.entityImage = new ImageView(new Image(imagePath));
         this.health = health;
+        this.maxHealth = health;
         this.entityId = id;
         this.gameFrame = gameFrame;
         this.isTargetable = false; // Default: cannot be hit
@@ -103,6 +105,7 @@ public abstract class Entity {
 
     // Getters
     public int getHealth() { return health; }
+    public int getMaxHealth() { return maxHealth; }
     public Rectangle getHitbox() { return entityHitbox; }
     public boolean isTargetable() { return isTargetable; }
     public ImageView getImage() { return entityImage; }
@@ -114,6 +117,7 @@ public abstract class Entity {
 
     // Setters
     public void setHealth(int health) { this.health = health; }
+    public void setMaxHealth(int health) { this.maxHealth = health; }
     public void setIsTargetable(boolean targetable) { this.isTargetable = targetable; }
 
     // Abstract methods (must be implemented in subclasses)

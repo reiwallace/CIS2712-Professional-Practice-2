@@ -81,7 +81,7 @@ public class Enemy extends Entity {
     /** Shoots a bullet below the enemy
      */
     private void shoot() {
-        Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10);
+        Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 1);
         mainWindow.getGameFrame().getEntities().add(enemyBullet);
     }
 

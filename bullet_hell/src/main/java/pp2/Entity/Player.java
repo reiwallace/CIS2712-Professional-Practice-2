@@ -1,12 +1,13 @@
 package pp2.Entity;
 
+import javafx.scene.control.ProgressBar;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pp2.GUI.MainWindow;
 
 public class Player extends Entity {
     private static String playerImageURL = "https://i.ibb.co/TD8pxWmR/ship-stopped.png";
-
+    private ProgressBar healthBar = new ProgressBar(1);
     private int speed; // Player movement speed
 
     private int lives = 5;
@@ -22,6 +23,12 @@ public class Player extends Entity {
         super(playerImageURL, health, 1, mainWindow, gameFrame, new int[] {50, 50}); // Call Entity constructor
         this.speed = speed;
         this.gameFrame = gameFrame; // Assign game area
+
+        // Set up health bar
+        healthBar.setPrefWidth(50);
+        healthBar.setPrefHeight(10);
+        healthBar.setVisible(true);
+        mainWindow.getGrid().add(healthBar, 2, 1, 3, 1);
 
         // Enable controls and add player to grid
         GameplayInputs movements = new GameplayInputs(this, mainWindow.getGrid(), gameFrame, speed);
@@ -50,6 +57,9 @@ public class Player extends Entity {
         // Update hitbox position
         entityHitbox.setTranslateX(entityImage.getTranslateX() + entityImage.getFitWidth() * 0.25);
         entityHitbox.setTranslateY(entityImage.getTranslateY());
+        // Update healthbar position
+        healthBar.setTranslateX(entityImage.getTranslateX() - entityImage.getFitWidth() * 0.01);
+        healthBar.setTranslateY(entityImage.getTranslateY() - entityImage.getFitHeight() * 0.2);
     }
 
     /** Reduces the player's health when hit.
@@ -58,7 +68,7 @@ public class Player extends Entity {
     @Override
     public void takeDamage(int damage) {
         setHealth(getHealth() - damage);
-        System.out.println("Player hit! Health: " + getHealth());
+        healthBar.setProgress((double)health/(double)maxHealth);
 
         if (getHealth() <= 0) {
             destroy();
@@ -70,6 +80,7 @@ public class Player extends Entity {
     @Override
     public void destroy() {
         mainWindow.getGrid().getChildren().removeAll(entityImage, entityHitbox);
+        healthBar.setVisible(false);
         setIsTargetable(false);
     }
 
