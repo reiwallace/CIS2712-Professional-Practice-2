@@ -1,39 +1,41 @@
 package pp2.Entity.MovementPatterns;
 
-
-import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
 import pp2.Entity.Entity;
 import pp2.GUI.MainWindow;
 
 public class CirclePattern extends MovementPattern {
-    private int[] centrePoint = new int[2]; 
-    private int radius = 10;
+    private double centreX, centreY; // centre of circular path
+    private double radius; // radius of the circle
+    private double pathAngle; // current angle of the entity in the circular path
 
-    private Double[] nextPoint = new Double[2];
-    /** Start a circle pattern for an entity with a given speed
-     * @param entity - Entity to move
-     * @param mainWindow - Window entity is on
-     * @param speed - Speed of movement
-     */
-    public CirclePattern(Entity entity, MainWindow mainWindow, int speed, boolean moving) {
-        super(entity, mainWindow, speed, moving);
-        centrePoint[0] = (int) (mainWindow.getGameFrame().getGameFrame().getWidth() / 2);
-        centrePoint[1] = (int) (mainWindow.getGameFrame().getGameFrame().getHeight() * 0.6);
-        radius = (int) (mainWindow.getGameFrame().getGameFrame().getWidth() / 3);
-
-        nextPoint[0] = (double) centrePoint[0] + radius;
-        nextPoint[1] = (double) centrePoint[1];
+    public CirclePattern(Entity entity, MainWindow mainWindow, double centreX, double centreY, double radius, int speed) {
+        super(entity, mainWindow, speed, true);
+        this.centreX = centreX;
+        this.centreY = centreY;
+        this.radius = radius;
+        this.pathAngle = 0; // start at 0 degrees
     }
 
     @Override
-    protected void moveEntity() {
-        TranslateTransition movement = new TranslateTransition(Duration.seconds(speed));   
-        // CIRCLE MATH
+    public void moveEntity() { // changed method from private to public
+        pathAngle += speed;  // update the angle based on speed
+        if (pathAngle >= 360) {
+            pathAngle -= 360; // prevent the angle from going over 360
+        }
+
+        // convert the angle to radians for trigonometry
+        double angleInRadians = Math.toRadians(pathAngle);
+
+        // calculate the new position on the circumfrence of the circle
+        double x = centreX + radius * Math.cos(angleInRadians); 
+        double y = centreY + radius * Math.sin(angleInRadians);
+
+        // update the entity's position -- this required changing the visiblity to public
+        entity.setPosition(x, y);
     }
 
     @Override
     public void stopMovement() {
-        
+        moving = false;
     }
-}   
+}

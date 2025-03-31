@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import pp2.Entity.Bullet;
 import pp2.Entity.Entity;
+import pp2.Entity.MovementPatterns.CirclePattern;
 import pp2.GUI.MainWindow;
 
 import java.util.Random;
@@ -15,6 +16,7 @@ public class Enemy extends Entity {
     private static String enemyImageURL = "https://i.ibb.co/LhYpPskV/player.png";
     private int damage;
     private Timeline shootTimer;
+    private CirclePattern circlePattern;
 
     /**
      * Constructor for Enemy
@@ -41,33 +43,34 @@ public class Enemy extends Entity {
 
         // Start moving and shooting
         startShooting();
+
+        // Variables for circular movement pattern
+        double centreX = gameFrame.getWidth() / 2;  // center of the screen width
+        double centreY = gameFrame.getHeight() / 2; // center of the screen height
+        double radius = (gameFrame.getWidth() / 3);  // radius determines how large the orbit of the entity is
+        int speed = 1; // entity movement speed around the orbit
+    
+        circlePattern = new CirclePattern(this, mainWindow, centreX, centreY, radius, speed);
+
+        startMoving();
     }
 
-    /* Redundant
-    public void moveDown() {
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(10), getImage());
-        transition.setByY(400);
-        transition.setCycleCount(1);
-        transition.play();
+    private void startMoving() {
+        // used a thread instead of timeline -- could implement delta time
+        new Thread(() -> {
+            while (true) {
+                if (circlePattern != null) {
+                    circlePattern.moveEntity();
+                }
 
-        // Update position and hitbox continuously
-        positionTracker = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                double x_pos = getImage().getLayoutX() + getImage().getTranslateX();
-                double y_pos = getImage().getLayoutY() + getImage().getTranslateY();
-
-                getHitbox().setLayoutX(x_pos);
-                getHitbox().setLayoutY(y_pos);
+                try {
+                    Thread.sleep(16); // roughly 60 frames per second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        };
-        positionTracker.start();
-
-        transition.setOnFinished(e -> {
-            positionTracker.stop();
-            destroy();
-        });
-    } */
+        }).start();
+    }
 
     @Override
     public void takeDamage(int damage) {
@@ -88,8 +91,6 @@ public class Enemy extends Entity {
         System.out.println("Enemy destroyed!");
     }
 
-    /** Begins a loop where the entity fires bullet every 2 seconds
-     */
     private void startShooting() {
         shootTimer = new Timeline(new KeyFrame(Duration.seconds(2), e -> shoot()));
         shootTimer.setCycleCount(Timeline.INDEFINITE);
@@ -107,7 +108,7 @@ public class Enemy extends Entity {
         Bullet enemyBullet = new Bullet(gameFrame, mainWindow, getPos()[0], getPos()[1] + entityImage.getFitHeight() / 2 , true, 10, "https://i.ibb.co/RpGfBNNN/bullet-Photoroom.png");
     }
 
-    // Optional getters for x and y
+    // optional getters for x and y
     public static String getEnemyImagePath() { return enemyImageURL; }
     public static void setEnemyImagePath(String enemyImageURL) { Enemy.enemyImageURL = enemyImageURL; }
     public int getDamage() { return damage; }
