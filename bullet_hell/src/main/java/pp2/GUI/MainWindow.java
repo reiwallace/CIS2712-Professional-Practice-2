@@ -17,7 +17,7 @@ public class MainWindow {
     private Scene scene = new Scene(pane);
     private GameFrame gameFrame;
     private PlayerStatisticsPanel statsPanel;
-
+    private MainMenu mainMenu;
     private String title = "Bullet Hell"; // Stage title
     private int rows = 30; // Number of rows in the grid pane
     private int columns = 40; // Number of columns in the grid pane
@@ -34,6 +34,11 @@ public class MainWindow {
         // Define height to calculate title bar height later
         stage.setMaxHeight(100);
         stage.setMaxWidth(100);
+
+
+                // create MainMenu object with reference to MainWindow
+        mainMenu = new MainMenu(this);
+        mainMenu.showMenu(pane);
 
         // Create grid rows for pane
         for(int i = 0; i < rows; i++) {
@@ -88,6 +93,7 @@ public class MainWindow {
      */
     public void startGame() {
         try {
+            mainMenu.removeMenu(pane);
             gameFrame = new GameFrame(stage.getHeight() - titleBarHeight, stage.getWidth(), this);
             gameFrame.startLevel();
         } catch (FileNotFoundException e) {
