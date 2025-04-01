@@ -14,7 +14,7 @@ public class Level1 extends AbstractLevel{
         // Enemy spawns
         for(int i = 5; i < 6; i++) {
             Enemy enemy1 = new Enemy(10, 10, mainWindow, gameFrame);
-            EightShotPattern attackPattern = new EightShotPattern(mainWindow, enemy1, 1);
+            EightShotPattern attackPattern = new EightShotPattern(mainWindow, enemy1, 100);
             mainWindow.getGameFrame().getEntities().add(enemy1);
             CirclePattern circlePattern1 = new CirclePattern(enemy1, mainWindow, 1, true);
             spawnEnemy(i, 10, enemy1, circlePattern1, entryPositionTopLeft, gameFrame);

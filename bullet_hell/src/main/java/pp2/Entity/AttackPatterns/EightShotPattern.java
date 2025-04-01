@@ -18,11 +18,11 @@ public class EightShotPattern extends AbstractAttackPattern{
         {-0.5, 0.0},
         {-0.3, 0.3}
     };
-    private int arrayCount = 0;
+
     /** Start in an 8 directional pattern
      * @param mainWindow - Main window to attach bullets to
      * @param entity - Entity to fire bullets from
-     * @param fireRate - Rate of fire for bullets in seconds :3
+     * @param fireRate - Rate of fire for bullets in milliseconds :3
      * @param speed - speed of bullet
      */
     public EightShotPattern(MainWindow mainWindow, Entity entity, int fireRate) {
@@ -32,7 +32,7 @@ public class EightShotPattern extends AbstractAttackPattern{
     @Override
     public void startFiring() {
         if(fireRate < 1) fireRate = 100;
-        shootTimer = new Timeline(new KeyFrame(Duration.seconds(fireRate), e -> fire()));
+        shootTimer = new Timeline(new KeyFrame(Duration.millis(fireRate), e -> fire()));
         shootTimer.setCycleCount(Timeline.INDEFINITE);
         shootTimer.play();
     }
