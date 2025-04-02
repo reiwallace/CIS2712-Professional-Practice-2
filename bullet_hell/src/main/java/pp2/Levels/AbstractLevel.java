@@ -110,9 +110,9 @@ public abstract class AbstractLevel {
     }
 
     /** Moves an entity off screen then despawns it
-     * @param x - X coordinate to move entity to
-     * @param y - Y coordinate to move entity to
+     * @param coordinates - Coordinates to move the enemy to upon ending its movement [x, y]
      * @param entity - Entity to move and despawn
+     * @param movementPattern - Movement pattern used by the entity to cancel hitbox animation
      */
     private void despawn(Double[] coordinates, Entity entity, MovementPattern movementPattern) {
         TranslateTransition despawnMovement = new TranslateTransition(Duration.seconds(2), entity.getImage());
