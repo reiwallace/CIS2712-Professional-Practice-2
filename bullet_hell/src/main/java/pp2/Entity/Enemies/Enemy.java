@@ -36,12 +36,15 @@ public class Enemy extends Entity {
         entityImage.setVisible(false);
     }
 
+    /** Reduces the player's health when hit.
+     * @param damage - Damage to reduce player's health by
+     */
     @Override
     public void takeDamage(int damage) {
-        setHealth(getHealth() - damage); // Default damage
-        System.out.println("Enemy hit! Health: " + getHealth());
+        setHealth(getHealth() - damage);
 
         if (getHealth() <= 0) {
+            mainWindow.getStatsPanel().updateScore();
             destroy();
         }
     }
@@ -50,6 +53,7 @@ public class Enemy extends Entity {
     public void destroy() {
         if (this.mainWindow != null) {
             mainWindow.getGrid().getChildren().removeAll(getImage(), getHitbox());
+            setIsTargetable(false);
         }
     }
 

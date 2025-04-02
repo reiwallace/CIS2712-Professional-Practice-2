@@ -74,7 +74,7 @@ public class Level1 extends AbstractLevel{
         }
 
         // 18 seconds spawn a healthier more aggressive enemy
-        Enemy enemyCenter18 = new Enemy(10, 3, mainWindow, gameFrame);
+        Enemy enemyCenter18 = new Enemy(5, 3, mainWindow, gameFrame);
         enemyCenter18.setFitSize(80, 80);
         StationaryPattern patternCenter18 = new StationaryPattern(mainWindow, new Double[] {gameFrame.getWidth() / 2 - enemyCenter18.getImage().getFitWidth()/2, gameFrame.getHeight() * 0.15}, 1.0);
         EightShotPattern eightshotRight18 = new EightShotPattern(mainWindow, enemyCenter18, 2000.0);
@@ -87,7 +87,7 @@ public class Level1 extends AbstractLevel{
             if(flip) speed = 1.5;
             else speed = 1.5;
 
-            Enemy enemy = new Enemy(2, 1, mainWindow, gameFrame);
+            Enemy enemy = new Enemy(1, 1, mainWindow, gameFrame);
             HorizontalPattern pattern = new HorizontalPattern(mainWindow, speed, new Double[] {gameFrame.getWidth() * 0.1 - enemy.getImage().getFitWidth(), gameFrame.getHeight() * (0.4 - 0.25 * i/16)}, new Double[] {gameFrame.getWidth() * 0.9 - enemy.getImage().getFitWidth(), gameFrame.getHeight() * (0.4 - 0.25 * i/16)});
             DownwardFiring attack = new DownwardFiring(mainWindow, enemy, 2.0 * i/19 + 1, 2.0);
             mainWindow.getGameFrame().getEntities().add(enemy);
@@ -123,7 +123,7 @@ public class Level1 extends AbstractLevel{
 
         // Circling enemies left side
         for(int i = 1; i < 45; i += 2) {
-            Enemy enemy = new Enemy(2, 1, mainWindow, gameFrame);
+            Enemy enemy = new Enemy(1, 1, mainWindow, gameFrame);
             CirclePattern pattern = new CirclePattern(mainWindow, 1.0, enemy, gameFrame.getWidth() * 0.15, new Double[] {gameFrame.getWidth() * 0.3 - enemy.getImage().getFitWidth(), gameFrame.getHeight() * 0.3});
             DownwardFiring attack = new DownwardFiring(mainWindow, enemy, 3.0, 1.0);
             mainWindow.getGameFrame().getEntities().add(enemy);
@@ -132,7 +132,7 @@ public class Level1 extends AbstractLevel{
 
         // Circling enemies right side
         for(int i = 1; i < 45; i += 2) {
-            Enemy enemy = new Enemy(2, 1, mainWindow, gameFrame);
+            Enemy enemy = new Enemy(1, 1, mainWindow, gameFrame);
             CirclePattern pattern = new CirclePattern(mainWindow, 1.0, enemy, gameFrame.getWidth() * 0.15, new Double[] {gameFrame.getWidth() * 0.7 - enemy.getImage().getFitWidth(), gameFrame.getHeight() * 0.3});
             DownwardFiring attack = new DownwardFiring(mainWindow, enemy, 3.0, 1.0);
             mainWindow.getGameFrame().getEntities().add(enemy);
@@ -148,7 +148,7 @@ public class Level1 extends AbstractLevel{
             Double[] entryPoint = new Double[2];
             if(peekerPositions[arrayIndex][0] > gameFrame.getWidth()/2) entryPoint = new Double[] {peekerPositions[arrayIndex][0] + gameFrame.getWidth() * 0.15, peekerPositions[arrayIndex][1]};
             else entryPoint = new Double[] {peekerPositions[arrayIndex][0] - gameFrame.getWidth() * 0.15, peekerPositions[arrayIndex][1]};
-            Enemy enemy = new Enemy(10, 5, mainWindow, gameFrame);
+            Enemy enemy = new Enemy(10, 4, mainWindow, gameFrame);
             enemy.getImage().setImage(new Image("file:resources/Entities/peeker.png"));
             StationaryPattern pattern = new StationaryPattern(mainWindow, peekerPositions[arrayIndex], 0.5);
             AimedShotPattern attack = new AimedShotPattern(mainWindow, enemy, mainWindow.getGameFrame().getPlayer(), 1.0, 2.0);
@@ -164,7 +164,7 @@ public class Level1 extends AbstractLevel{
                 stationary = 0.3;
                 entryPosition = entryPositionLeft;
             } 
-            Enemy enemy = new Enemy(10, 3, mainWindow, gameFrame);
+            Enemy enemy = new Enemy(5, 3, mainWindow, gameFrame);
             enemy.setFitSize(80, 80);
             StationaryPattern pattern = new StationaryPattern(mainWindow, new Double[] {gameFrame.getWidth() * stationary - enemy.getImage().getFitWidth(), gameFrame.getHeight() * 0.3}, 1.0);
             EightShotPattern eightshot = new EightShotPattern(mainWindow, enemy, 2000.0);
@@ -174,6 +174,6 @@ public class Level1 extends AbstractLevel{
 
         // 102 - end main boss
         Boss boss = new Boss(mainWindow, gameFrame);
-        
+
     }
 }

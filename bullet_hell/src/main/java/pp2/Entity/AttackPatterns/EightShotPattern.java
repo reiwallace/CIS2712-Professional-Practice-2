@@ -40,6 +40,7 @@ public class EightShotPattern extends AbstractAttackPattern{
 
     @Override
     public void fire() {
+        if(!entity.isTargetable()) return;
         for(int i = 0; i < trajectories.length; i++) {
             Bullet enemyBullet = new Bullet(mainWindow, entity.getPos()[0] + entity.getImage().getFitWidth() * 0.32, entity.getPos()[1], true, true, ((Enemy)entity).getDamage());
             enemyBullet.moveBullet(trajectories[i]);

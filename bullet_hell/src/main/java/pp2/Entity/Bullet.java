@@ -1,8 +1,10 @@
 package pp2.Entity;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import pp2.Entity.Enemies.Enemy;
 import pp2.GUI.MainWindow;
 
 public class Bullet extends Entity {
@@ -27,6 +29,7 @@ public class Bullet extends Entity {
         this.isEnemyBullet = isEnemyBullet;
         this.damage = damage;
         
+        if(!isEnemyBullet) entityImage.setImage(new Image("file:resources/Entities/bullet-purple.png"));
         // Set the bullet to an imageView
         setPosition(initialX, initialY);
         addEntity(1, 3);
@@ -80,6 +83,13 @@ public class Bullet extends Entity {
             if(entityHitbox.getBoundsInParent().intersects(player.getHitbox().getBoundsInParent()) && player.isTargetable) {
                 destroy();
                 player.takeDamage(damage);
+            }
+        } else {
+            for(int i = 0; i < mainWindow.getGameFrame().getEntities().size(); i++) {
+                if(mainWindow.getGameFrame().getEntities().get(i) != null && mainWindow.getGameFrame().getEntities().get(i) instanceof Enemy && entityHitbox.getBoundsInParent().intersects(mainWindow.getGameFrame().getEntities().get(i).getHitbox().getBoundsInParent()) && mainWindow.getGameFrame().getEntities().get(i).isTargetable) {
+                    destroy();
+                    mainWindow.getGameFrame().getEntities().get(i).takeDamage(damage);
+                }
             }
         }
     }

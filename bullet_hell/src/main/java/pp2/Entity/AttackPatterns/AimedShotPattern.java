@@ -17,6 +17,7 @@ public class AimedShotPattern extends AbstractAttackPattern {
 
     @Override
     public void fire() {  
+        if(!entity.isTargetable()) return;
         entity.getImage().setRotate(getAngle(entity, player));
         Bullet enemyBullet = new Bullet(mainWindow, entity.getPos()[0], entity.getPos()[1], true, false, ((Enemy)entity).getDamage());
         enemyBullet.moveBullet(calculateDirection());

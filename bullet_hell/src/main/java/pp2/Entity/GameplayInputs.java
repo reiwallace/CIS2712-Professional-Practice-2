@@ -31,6 +31,9 @@ public class GameplayInputs {
      */
     public void move(KeyCode key) {
 
+        if(key == KeyCode.SPACE) {
+            player.shoot();
+        }
         // creates a boolean for each direction
         if(key == KeyCode.LEFT) {
             leftPressed = true;

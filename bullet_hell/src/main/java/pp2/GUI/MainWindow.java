@@ -4,6 +4,8 @@ package pp2.GUI;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -18,10 +20,11 @@ public class MainWindow {
     private GameFrame gameFrame;
     private PlayerStatisticsPanel statsPanel;
     private MainMenu mainMenu;
-    private String title = "Bullet Hell"; // Stage title
+    private String title = "Nostromo"; // Stage title
     private int rows = 30; // Number of rows in the grid pane
     private int columns = 40; // Number of columns in the grid pane
 
+    private ImageView background = new ImageView(new Image("file:resources/Backgrounds/outside-background.png"));
     private ArrayList<Rectangle> backDrop = new ArrayList<Rectangle>();
 
     public double titleBarHeight = 37.5999755859375;
@@ -68,6 +71,7 @@ public class MainWindow {
         stage.setTitle(title);
         stage.setScene(scene);
 
+        pane.add(background, 0, 0, 30, 40);
         // Enable debug mode
         if(debug) new DebugMenu(this);
     }

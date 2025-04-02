@@ -18,6 +18,7 @@ public class DownwardFiring extends AbstractAttackPattern{
 
     @Override
     public void fire() {
+        if(!entity.isTargetable()) return;
         Bullet enemyBullet = new Bullet(mainWindow, entity.getPos()[0], entity.getPos()[1] + entity.getImage().getFitHeight() / 2 , true, false, ((Enemy)entity).getDamage());
         enemyBullet.moveBullet(new Double[] {0.0, speed});
         mainWindow.getGameFrame().getEntities().add(enemyBullet);

@@ -1,14 +1,19 @@
 package pp2.Entity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.scene.control.ProgressBar;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import pp2.Entity.Enemies.Enemy;
 import pp2.GUI.MainWindow;
 
 public class Player extends Entity {
     private static String playerImageURL = "file:resources/Entities/ship-stopped.png";
     private ProgressBar healthBar = new ProgressBar(1);
     private int speed; // Player movement speed
+    private boolean shooting = false;
 
     private int lives = 5;
 
@@ -82,6 +87,22 @@ public class Player extends Entity {
         mainWindow.getGrid().getChildren().removeAll(entityImage, entityHitbox);
         healthBar.setVisible(false);
         setIsTargetable(false);
+    }
+
+    public void shoot() {
+        if(shooting) return;
+        Timer shotDelay = new Timer();
+        TimerTask toggleShoot = new TimerTask() {
+            @Override
+            public void run() {
+                shooting = false;
+            }
+            
+        };
+        Bullet bullet = new Bullet(mainWindow, getPos()[0], getPos()[1] - getImage().getFitHeight() / 2 , false, false, 1);
+        bullet.moveBullet(new Double[] {0.0, -2.0});
+        shooting = true;
+        shotDelay.schedule(toggleShoot, 500);
     }
 
     public int getSpeed() { return speed; }

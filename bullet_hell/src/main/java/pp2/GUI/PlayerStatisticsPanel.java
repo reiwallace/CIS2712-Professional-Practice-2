@@ -34,6 +34,7 @@ public class PlayerStatisticsPanel {
      */
     public void configureLabel(Label label, GridPane grid, int row) {
         label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        label.setStyle("-fx-background-color: black; -fx-alignment: center; -fx-font-size: 35; -fx-font-weight: bold; -fx-text-background-color: white;");
         label.setVisible(true);
         grid.add(label, 29, row, 9, 3);
     }
@@ -44,5 +45,10 @@ public class PlayerStatisticsPanel {
      */
     public void updateLabel(Label label, String text) {
         label.setText(text);
+    }
+
+    public void updateScore() {
+        score.increaseScore(100);
+        updateLabel(scoreDisplay, "Score: " + score.getScore());
     }
 }

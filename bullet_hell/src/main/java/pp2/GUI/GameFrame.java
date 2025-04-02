@@ -19,7 +19,7 @@ public class GameFrame {
     private MainWindow mainWindow;
     private GridPane mainGrid;
 
-    private Image imagePath = new Image("file:resources/Backgrounds/gameBGTEST.jpg"); // Path of background image (URL)
+    private Image imagePath = new Image("file:resources/Backgrounds/playarea-background.png"); // Path of background image (URL)
     private ImageView backgroundImage  = new ImageView(imagePath); // Background image
 
     private Player player;
@@ -40,10 +40,10 @@ public class GameFrame {
         gameFrame.setFill(Color.BLACK);
         backgroundImage.setFitWidth(gameFrame.getWidth());
         backgroundImage.setFitHeight(gameFrame.getHeight());
+        
         // Set up background image
         mainGrid.add(gameFrame, 2, 1, 24, 28); // Add the game window to the game frame 2 columns in and 1 row down
         mainGrid.add(backgroundImage, 2, 1, 24, 28); // Add background image to frame
-
         entities.add(player = new Player(10, 10, mainWindow, gameFrame)); // Initialise player character
     }
 
