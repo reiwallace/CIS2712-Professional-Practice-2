@@ -8,8 +8,8 @@ import pp2.Entity.Enemies.Enemy;
 import pp2.GUI.MainWindow;
 
 public class CirclePattern extends MovementPattern {
-    private Double[] centrePoint = new Double[2];
-    private int radius = 100; // Default radius
+    private Double[] centrePoint;
+    private Double radius = 10.0; // Default radius
     private AnimationTimer positionTracker;
     private TranslateTransition circleMovement;
 
@@ -22,13 +22,10 @@ public class CirclePattern extends MovementPattern {
      * @param speed - Speed of movement (lower = faster)
      * @param moving - If entity is moving
      */
-    public CirclePattern(MainWindow mainWindow, int speed, Entity entity) {
+    public CirclePattern(MainWindow mainWindow, Double speed, Entity entity, Double radius, Double[] centre) {
         super(mainWindow, speed);  
-
-        // Set the center of the circle to be somewhere in the game frame
-        centrePoint[0] = (mainWindow.getGameFrame().getGameFrame().getWidth() * 0.5  - entity.getImage().getFitWidth()/2);
-        centrePoint[1] = (mainWindow.getGameFrame().getGameFrame().getHeight() * 0.3);
-        radius = (int) (mainWindow.getGameFrame().getGameFrame().getWidth() / 4);
+        this.radius = radius;
+        this.centrePoint = centre;
     }
 
     /* Move entity to starting position and start main movement loop

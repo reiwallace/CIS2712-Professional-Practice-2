@@ -15,7 +15,7 @@ public class StationaryPattern extends MovementPattern{
      * @param position - coordinates to move entity to [x, y]
      * @param speed - how long it takes enemy to position in seconds
      */
-    public StationaryPattern(MainWindow mainWindow, Double[] position, int speed) {
+    public StationaryPattern(MainWindow mainWindow, Double[] position, Double speed) {
         super(mainWindow, speed);
         positionChoice = position;
     }

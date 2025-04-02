@@ -6,10 +6,10 @@ import pp2.GUI.MainWindow;
 public abstract class MovementPattern {
     protected Entity entity;
     protected MainWindow mainWindow;
-    protected int speed = 1;
+    protected Double speed = 1.0;
     protected boolean moving = false;
     
-    public MovementPattern(MainWindow mainWindow, int speed) {
+    public MovementPattern(MainWindow mainWindow, Double speed) {
         this.mainWindow = mainWindow;
         this.speed = speed;
     }

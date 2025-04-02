@@ -15,11 +15,11 @@ public class HorizontalPattern extends MovementPattern{
 
     /** Move entity in a horizontal pattern back and fourth
      * @param mainWindow - Window to move entity in
-     * @param speed - Speed of movement in seconds
+     * @param speed - Speed of movement in milliseconds
      * @param coordinates1 - Coordinates of left-most point
      * @param coordinates2 - Coordinates of right-most point
      */
-    public HorizontalPattern(MainWindow mainWindow, int speed, Double[] coordinates1, Double[] coordinates2) {
+    public HorizontalPattern(MainWindow mainWindow, Double speed, Double[] coordinates1, Double[] coordinates2) {
         super(mainWindow, speed);
         this.coordinates1 = coordinates1;
         this.coordinates2 = coordinates2;
@@ -84,7 +84,8 @@ public class HorizontalPattern extends MovementPattern{
         movementRight.setOnFinished(e -> {
             movementLeft.play();
         });
-        movementLeft.play();
+        if(findClosestCoordinate() == coordinates2) movementLeft.play();
+        else movementRight.play();
     }
 
     @Override

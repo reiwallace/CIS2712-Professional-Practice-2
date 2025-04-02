@@ -10,7 +10,7 @@ import pp2.GUI.MainWindow;
 public abstract class AbstractAttackPattern {
     protected MainWindow mainWindow; // Main game window
     protected Entity entity; // Attacking enemy
-    protected int fireRate; // Rate of fire
+    protected Double fireRate; // Rate of fire
     protected Double speed; // Speed of bullets
     protected Timeline shootTimer; // Timer to repeat shots
 
@@ -20,7 +20,7 @@ public abstract class AbstractAttackPattern {
      * @param fireRate - Rate of fire for bullets in seconds
      * @param speed - speed of bullet
      */
-    public AbstractAttackPattern(MainWindow mainWindow, Entity entity, int fireRate, Double speed) {
+    public AbstractAttackPattern(MainWindow mainWindow, Entity entity, Double fireRate, Double speed) {
         this.mainWindow = mainWindow;
         this.entity = entity;
         this.fireRate = fireRate;
@@ -32,7 +32,7 @@ public abstract class AbstractAttackPattern {
     /** Start entity firing
      */
     public void startFiring() {
-        if(fireRate < 1) fireRate = 2;
+        if(fireRate < 1) fireRate = 2.0;
         shootTimer = new Timeline(new KeyFrame(Duration.seconds(fireRate), e -> fire()));
         shootTimer.setCycleCount(Timeline.INDEFINITE);
         shootTimer.play();

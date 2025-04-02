@@ -89,8 +89,8 @@ public class Bullet extends Entity {
     public void setHitbox() {
         if (entityImage != null) {
             entityHitbox = new Rectangle(
-                    entityImage.getFitWidth() * 0.20 ,
-                    entityImage.getFitHeight() * 0.4
+                    entityImage.getFitWidth() * 0.50 ,
+                    entityImage.getFitHeight() * 0.5
             );
             entityHitbox.setFill(Color.BLACK);
             entityHitbox.setVisible(false);
@@ -104,7 +104,7 @@ public class Bullet extends Entity {
         entityImage.setTranslateX(x);
         entityImage.setTranslateY(y);
         // Update hitbox position
-        entityHitbox.setTranslateX(entityImage.getTranslateX() + entityImage.getFitWidth() * 0.40);
+        entityHitbox.setTranslateX(entityImage.getTranslateX() + entityImage.getFitWidth() * 0.25);
         entityHitbox.setTranslateY(entityImage.getTranslateY());
     }
 

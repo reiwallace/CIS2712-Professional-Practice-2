@@ -76,10 +76,35 @@ public abstract class AbstractLevel {
                 return new Double[] {entity.getPos()[0], 0 - entity.getImage().getFitHeight() - 2};
             }
         } else { // If on the left side of the frame
-            if(frameWidth + x < y) { // If closer to the left edge than the top of the screen
+            if(0 + x < y) { // If closer to the left edge than the top of the screen
                 return new Double[] {0 - entity.getImage().getFitWidth() - 2, entity.getPos()[1]};
             } else {
                 return new Double[] {entity.getPos()[0], 0 - entity.getImage().getFitHeight() - 2};
+            }
+        }
+    }
+
+        /** Finds the closest edge to an entity
+     * @param entity - Entity to find closest edge from
+     * @param gameFrame - The game play area
+     * @return - Coordinates of the closest edge
+     */
+    protected Double[] findClosestEdgePosition(Double[] pos, Rectangle gameFrame) {
+        Double x = pos[0];
+        Double y = pos[1];
+        Double frameWidth = gameFrame.getWidth();
+
+        if(x > frameWidth/2) { // If on the right side of the frame
+            if(frameWidth - x < y) { // If closer to the right edge than top of the screen
+                return new Double[] {gameFrame.getWidth() + 50 + 2, pos[1]};
+            } else {
+                return new Double[] {pos[0], 0 - 50.0 - 2};
+            }
+        } else { // If on the left side of the frame
+            if(0 + x < y) { // If closer to the left edge than the top of the screen
+                return new Double[] {0 - 50.0 - 2, pos[1]};
+            } else {
+                return new Double[] {pos[0], 0 - 50.0 - 2};
             }
         }
     }

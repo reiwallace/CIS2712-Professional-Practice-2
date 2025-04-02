@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import pp2.Entity.Bullet;
 import pp2.Entity.Entity;
+import pp2.Entity.Enemies.Enemy;
 import pp2.GUI.MainWindow;
 
 public class EightShotPattern extends AbstractAttackPattern{
@@ -25,13 +26,13 @@ public class EightShotPattern extends AbstractAttackPattern{
      * @param fireRate - Rate of fire for bullets in milliseconds :3
      * @param speed - speed of bullet
      */
-    public EightShotPattern(MainWindow mainWindow, Entity entity, int fireRate) {
+    public EightShotPattern(MainWindow mainWindow, Entity entity, Double fireRate) {
         super(mainWindow, entity, fireRate, 0.0);
     }
 
     @Override
     public void startFiring() {
-        if(fireRate < 1) fireRate = 100;
+        if(fireRate < 1) fireRate = 100.0;
         shootTimer = new Timeline(new KeyFrame(Duration.millis(fireRate), e -> fire()));
         shootTimer.setCycleCount(Timeline.INDEFINITE);
         shootTimer.play();
@@ -40,7 +41,7 @@ public class EightShotPattern extends AbstractAttackPattern{
     @Override
     public void fire() {
         for(int i = 0; i < trajectories.length; i++) {
-            Bullet enemyBullet = new Bullet(mainWindow, entity.getPos()[0], entity.getPos()[1], true, true, 1);
+            Bullet enemyBullet = new Bullet(mainWindow, entity.getPos()[0] + entity.getImage().getFitWidth() * 0.32, entity.getPos()[1], true, true, ((Enemy)entity).getDamage());
             enemyBullet.moveBullet(trajectories[i]);
             mainWindow.getGameFrame().getEntities().add(enemyBullet);
         }
