@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 import pp2.Entity.AttackPatterns.AimedShotPattern;
 import pp2.Entity.AttackPatterns.DownwardFiring;
 import pp2.Entity.AttackPatterns.EightShotPattern;
+import pp2.Entity.Enemies.Boss;
 import pp2.Entity.Enemies.Enemy;
 import pp2.Entity.MovementPatterns.CirclePattern;
 import pp2.Entity.MovementPatterns.HorizontalPattern;
@@ -138,8 +139,22 @@ public class Level1 extends AbstractLevel{
             spawnEnemy(46 + i + 1, 10, enemy, pattern, entryPositionTopRight, gameFrame);
         }
 
-        // Peepers
-
+        // Peekers
+        for(int i = 1; i < 43; i += 6) {
+            int arrayIndex = (i - 1)/6;
+            while(arrayIndex > peekerPositions.length) {
+                if(arrayIndex > peekerPositions.length) arrayIndex = i - peekerPositions.length;
+            }
+            Double[] entryPoint = new Double[2];
+            if(peekerPositions[arrayIndex][0] > gameFrame.getWidth()/2) entryPoint = new Double[] {peekerPositions[arrayIndex][0] + gameFrame.getWidth() * 0.15, peekerPositions[arrayIndex][1]};
+            else entryPoint = new Double[] {peekerPositions[arrayIndex][0] - gameFrame.getWidth() * 0.15, peekerPositions[arrayIndex][1]};
+            Enemy enemy = new Enemy(10, 5, mainWindow, gameFrame);
+            enemy.getImage().setImage(new Image("file:resources/Entities/peeker.png"));
+            StationaryPattern pattern = new StationaryPattern(mainWindow, peekerPositions[arrayIndex], 0.5);
+            AimedShotPattern attack = new AimedShotPattern(mainWindow, enemy, mainWindow.getGameFrame().getPlayer(), 1.0, 2.0);
+            mainWindow.getGameFrame().getEntities().add(enemy);
+            spawnEnemy(46 + i, 2, enemy, pattern, entryPoint, gameFrame);
+        }
 
         // Chonkers
         for(int i = 0; i < 2; i++) {
@@ -151,10 +166,14 @@ public class Level1 extends AbstractLevel{
             } 
             Enemy enemy = new Enemy(10, 3, mainWindow, gameFrame);
             enemy.setFitSize(80, 80);
-            StationaryPattern pattern = new StationaryPattern(mainWindow, new Double[] {gameFrame.getWidth() * stationary - enemy.getImage().getFitWidth()/2, gameFrame.getHeight() * 0.3}, 1.0);
+            StationaryPattern pattern = new StationaryPattern(mainWindow, new Double[] {gameFrame.getWidth() * stationary - enemy.getImage().getFitWidth(), gameFrame.getHeight() * 0.3}, 1.0);
             EightShotPattern eightshot = new EightShotPattern(mainWindow, enemy, 2000.0);
             mainWindow.getGameFrame().getEntities().add(enemy);
-            spawnEnemy(18, 20, enemy, pattern, entryPositionLeft, gameFrame);
+            spawnEnemy(52, 20, enemy, pattern, entryPositionLeft, gameFrame);
         }
+
+        // 102 - end main boss
+        Boss boss = new Boss(mainWindow, gameFrame);
+        
     }
 }
