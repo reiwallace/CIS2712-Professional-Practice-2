@@ -22,10 +22,8 @@ public class CirclePattern extends MovementPattern {
      * @param speed - Speed of movement (lower = faster)
      * @param moving - If entity is moving
      */
-    public CirclePattern(Entity entity, MainWindow mainWindow, int speed, boolean moving) {
-        super(mainWindow, speed);
-        this.entity = entity;
-        this.moving = moving;
+    public CirclePattern(MainWindow mainWindow, int speed, Entity entity) {
+        super(mainWindow, speed);  
 
         // Set the center of the circle to be somewhere in the game frame
         centrePoint[0] = (mainWindow.getGameFrame().getGameFrame().getWidth() * 0.5  - entity.getImage().getFitWidth()/2);
@@ -44,12 +42,13 @@ public class CirclePattern extends MovementPattern {
             }
         };
         positionTracker.start();
+        // Move entity to position
         TranslateTransition initialMovement = new TranslateTransition(Duration.seconds(speed), entity.getImage());
         initialMovement.setToX(centrePoint[0] + radius * Math.cos(angle));
         initialMovement.setToY(centrePoint[1] + radius * Math.sin(angle));
         initialMovement.setCycleCount(1);
         initialMovement.setAutoReverse(false);
-        initialMovement.setOnFinished( e -> {
+        initialMovement.setOnFinished( e -> { // Start enemy firing when in position
             moveEntity();
             if(entity instanceof Enemy) ((Enemy)entity).getAttackPattern().startFiring();
         });
@@ -59,7 +58,6 @@ public class CirclePattern extends MovementPattern {
     // Main movememnt loop
     @Override
     protected void moveEntity() {
-        if (!moving) return;
         circleMovement = new TranslateTransition(Duration.millis(16), entity.getImage());
         circleMovement.setToX(centrePoint[0] + radius * Math.cos(angle));
         circleMovement.setToY(centrePoint[1] + radius * Math.sin(angle));
@@ -75,8 +73,11 @@ public class CirclePattern extends MovementPattern {
 
     @Override
     public void stopMovement() {
-        moving = false;
         circleMovement.stop();
+    }
+
+    @Override
+    public void closePositionTracker() {
         positionTracker.stop();
     }
 }

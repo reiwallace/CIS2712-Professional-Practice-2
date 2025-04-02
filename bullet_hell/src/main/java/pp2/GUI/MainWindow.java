@@ -35,11 +35,6 @@ public class MainWindow {
         stage.setMaxHeight(100);
         stage.setMaxWidth(100);
 
-
-                // create MainMenu object with reference to MainWindow
-        mainMenu = new MainMenu(this);
-        mainMenu.showMenu(pane);
-
         // Create grid rows for pane
         for(int i = 0; i < rows; i++) {
             RowConstraints row = new RowConstraints();
@@ -87,6 +82,14 @@ public class MainWindow {
      */
     public void fullScreenMode() {
         setSize(1404);
+    }
+
+    /** Opens main menu
+     */
+    public void startMainMenu() {
+        // create MainMenu object with reference to MainWindow
+        mainMenu = new MainMenu(this);
+        mainMenu.showMenu(pane);
     }
 
     /** Starts the game and enables stats panel

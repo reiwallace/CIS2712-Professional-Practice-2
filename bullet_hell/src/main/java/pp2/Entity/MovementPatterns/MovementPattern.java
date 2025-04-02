@@ -26,4 +26,7 @@ public abstract class MovementPattern {
     /** Stop entity movement
      */
     public abstract void stopMovement();
+    /** Stops position tracker
+     */
+    public abstract void closePositionTracker();
 }

@@ -14,7 +14,6 @@ public class HorizontalPattern extends MovementPattern{
     private AnimationTimer positionTracker;
 
     /** Move entity in a horizontal pattern back and fourth
-     * @param entity - Entity to move
      * @param mainWindow - Window to move entity in
      * @param speed - Speed of movement in seconds
      * @param coordinates1 - Coordinates of left-most point
@@ -37,13 +36,13 @@ public class HorizontalPattern extends MovementPattern{
         positionTracker.start();
         // Get closest movement point
         Double[] coordinates = findClosestCoordinate();
-        // Move to initial point
+        // Move entity to position
         TranslateTransition initialMovement = new TranslateTransition(Duration.seconds(speed/2), entity.getImage());
         initialMovement.setToX(coordinates[0]);
         initialMovement.setToY(coordinates[1]);
         initialMovement.setCycleCount(1);
         initialMovement.setAutoReverse(false);
-        initialMovement.setOnFinished( e -> {
+        initialMovement.setOnFinished( e -> { // Start enemy firing when in position
             moveEntity();
             if(entity instanceof Enemy) ((Enemy)entity).getAttackPattern().startFiring();
         });
@@ -92,5 +91,10 @@ public class HorizontalPattern extends MovementPattern{
     public void stopMovement() {
         movementLeft.stop();
         movementRight.stop();
+    }
+
+    @Override
+    public void closePositionTracker() {
+        positionTracker.stop();
     }
 }

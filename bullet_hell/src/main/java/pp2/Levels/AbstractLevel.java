@@ -38,7 +38,7 @@ public abstract class AbstractLevel {
             public void run() {
                 movementPattern.stopMovement();
                 if(enemy instanceof Enemy) ((Enemy)enemy).getAttackPattern().stopFiring();
-                despawn(findClosestEdge(enemy, gameFrame), enemy);
+                despawn(findClosestEdge(enemy, gameFrame), enemy, movementPattern);
             }
         };
         // Define spawn task
@@ -89,13 +89,14 @@ public abstract class AbstractLevel {
      * @param y - Y coordinate to move entity to
      * @param entity - Entity to move and despawn
      */
-    private void despawn(Double[] coordinates, Entity entity) {
+    private void despawn(Double[] coordinates, Entity entity, MovementPattern movementPattern) {
         TranslateTransition despawnMovement = new TranslateTransition(Duration.seconds(2), entity.getImage());
         despawnMovement.setToX(coordinates[0]);
         despawnMovement.setToY(coordinates[1]);
         despawnMovement.setCycleCount(1);
         despawnMovement.setAutoReverse(false);
         despawnMovement.setOnFinished(e -> {
+            movementPattern.closePositionTracker();
             entity.destroy();
         });
         despawnMovement.play();

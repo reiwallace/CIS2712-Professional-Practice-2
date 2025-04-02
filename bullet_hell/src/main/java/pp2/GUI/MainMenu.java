@@ -1,21 +1,30 @@
 package pp2.GUI;
 
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class MainMenu {
     private VBox mainMenuBox;
     private MainWindow mainWindow;
+    private final String titlePath = "file:resources/Backgrounds/Nostrmo-Title-big.png";
 
     public MainMenu(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         mainMenuBox = new VBox(20); // Spacing between buttons
 
         // Create menu buttons
+        ImageView title = new ImageView(new Image(titlePath));
         Button startButton = createStyledButton("Start Game");
         Button optionsButton = createStyledButton("Options");
         Button quitButton = createStyledButton("Quit");
+
+        // Configure title image
+        title.setFitWidth(mainWindow.getStage().getWidth() * 0.5);
+        title.setFitHeight(mainWindow.getGrid().getHeight() * 0.2);
+
 
         // Add action events to buttons
         startButton.setOnAction(e -> mainWindow.startGame()); // This action will start the game 
@@ -23,7 +32,7 @@ public class MainMenu {
         quitButton.setOnAction(e -> System.exit(0));
 
         // Add buttons to layout and centre align them
-        mainMenuBox.getChildren().addAll(startButton, optionsButton, quitButton);
+        mainMenuBox.getChildren().addAll(title, startButton, optionsButton, quitButton);
         mainMenuBox.setStyle("-fx-background-color: black; -fx-alignment: center;");
     }        
     
